@@ -1,6 +1,13 @@
 # bower-files
 
+**Work in Progress!** Although tested, this module may not work as expected.
+Please feel free to contribute bug reports, ideas and/or code when unexpected
+behavior happens.
 
+[![Dependency Status](https://david-dm.org/ksmithut/bower-files.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files)
+[![devDependency Status](https://david-dm.org/ksmithut/bower-files/dev-status.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files#info=devDependencies)
+[![Build Status](https://travis-ci.org/ksmithut/bower-files.png)](https://travis-ci.org/ksmithut/bower-files)
+[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png)](https://coveralls.io/r/ksmithut/bower-files)
 
 ## Installation
 
@@ -10,26 +17,147 @@ $ npm install bower-files --save
 
 ## Usage
 
+This module is meant to help you manage your bower components and use them with task runners such as `grunt` and `gulp`.
 
+**The Problem**
 
-## Example
+So you use bower to manage your project's front-end dependencies. That's great,
+but then when you want to include those packages in your build scripts, what
+then? You could have an additional config file that defines which components to
+use and the paths to them, but that's just one more thing to manage. You use
+bower so you don't have to have that additional step of managing your front-end
+libraries.
 
-<!--
-│
-└
-├
-─
--->
+**The Solution**
 
+`bower-files` is a module that allows you to automatically get the paths to your
+components, and automatically split all of the files by extension.
 
+```javascript
+var gulp   = require('gulp')
+  , gutil  = require('gulp-util')
+  , concat = require('gulp-concat')
+  , uglify = require('gulp-uglify')
+  , files  = require('bower-files')()
+  ;
+
+gulp.task('libjs', function () {
+  gulp.src(files.js)
+    .pipe(concat('lib.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/js'));
+});
+```
+
+The other thing that it will do is make sure your components are in the correct
+order with the most dependeded upon script being first.
+
+*Other Solutions*
+
+Internally, there are other modules that do this same thing. Perhaps they may
+have suggestions for this module and end up using it:
+
+- [`gulp-bower-files`](https://www.npmjs.org/package/gulp-bower-files)
+
+## Options
+
+You can pass options into the function call to customize what you get:
+
+```javascript
+var bowerFiles = require('bower-files')
+  , jsLib
+  ;
+jsLib = bowerFiles({
+  ext: 'js'
+});
+```
+
+### `options.json` - The path to your `bower.json` or other such files
+
+#### Default: `bower.json`
+
+If the path given is an absolute path (meaning that it starts with `/`), then it
+will read the file given. If it is a relative path, then it will join the
+relative path with `process.cwd()`. So the default value ends up being:
+`process.cwd() + '/bower.json'`.
+
+### `options.dir` - The path to your `bower_components` or wherever your have
+set up your bower components to go.
+
+#### Default: `bower_components`
+
+The same path logic as with the `options.json` path applies here as well.
+
+### `options.ext` - Whether or not to split up the dependencies by extension.
+
+#### Default: `true`
+
+If true, then the resulting object will look something like this:
+
+```javascript
+{
+  js: [/* array of javascript files*/],
+  css: [/* array of css files */]
+  /* any other file extensions that may have been included. */
+}
+```
+
+If false, then the result will be an array of all of the files.
+
+If it's a string, then it will return an array of the files with the given
+extension.
+
+```javascript
+var bowerFiles = require('bower-files')
+  , jsLib
+  ;
+jsLib = bowerFiles({
+  ext: 'js'
+});
+```
+
+### `options.throw` - Whether or not to throw an error or just return one if an
+error occurs.
+
+#### Default: `true`
+
+If true, this module with throw the error. Otherwise, it will just return one
+for you to handle on your own.
 
 ## Troubleshooting
 
+There are a few things that can go wrong.
 
+If it cannot find your `bower.json` or
+whatever file you determine, the resulting object will be an error like:
+`Error reading project bower.json`.
 
-## Caveats
+If it cannot find a dependency defined in your `bower.json` or one of the child
+dependencies, it's likely because you need to run `bower install`, but it will
+return an Error object like: `Missing dependency "jquery".`;
 
+Occasionally, you will come across a bower component that doesn't have a `main`
+property defined in it's `bower.json` (jQuery didn't used to have it). Because
+this is how we determine which files to include, it won't include the component,
+but it will return an error. You can, however, provide it with the correct file.
 
+In your own `bower.json`, provide an "overrides" property that looks something
+like this:
+
+```javascript
+{
+  ...
+  "overrides": {
+    "jquery": {
+      "main": "./dist/jquery.js"
+    }
+  }
+}
+```
+
+The main property can be a string representing the relative path within the
+component directory to the main file to be included, or it can be an array of
+relative paths.
 
 ## Development
 
