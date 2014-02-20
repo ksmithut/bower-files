@@ -7,7 +7,7 @@ behavior happens.
 [![Dependency Status](https://david-dm.org/ksmithut/bower-files.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files)
 [![devDependency Status](https://david-dm.org/ksmithut/bower-files/dev-status.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files#info=devDependencies)
 [![Build Status](https://travis-ci.org/ksmithut/bower-files.png?branch=master)](https://travis-ci.org/ksmithut/bower-files)
-[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png)](https://coveralls.io/r/ksmithut/bower-files)
+[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png?branch=develop)](https://coveralls.io/r/ksmithut/bower-files?branch=develop)
 
 ## Installation
 
