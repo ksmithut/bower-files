@@ -90,6 +90,6 @@ gulp.task('docs', function () {
       '!coverage/**'
     ])
     .pipe(exec(
-      './node_modules/.bin/docco <%= file.path %>'
+      'docco <%= file.path %>'
     ));
 });
