@@ -1,7 +1,7 @@
 {
   "name": "bower-files",
   "version": "0.0.0",
-  "description": "",
+  "description": "Pulls in dynamic list of filepaths to bower components",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha && ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git://github.com/ksmithut/bower-files.git"
   },
-  "keywords": [],
+  "keywords": [
+    "bower",
+    "task management"
+  ],
   "author": "ksmithut",
   "license": "MIT",
   "bugs": {
