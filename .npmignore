@@ -1,0 +1,8 @@
+coverage
+docs
+node_modules
+test
+.gitignore
+.jshintrc
+.travis.yml
+gulpfile.js
