@@ -4,11 +4,11 @@
 Please feel free to contribute bug reports, ideas and/or code when unexpected
 behavior happens.
 
-[![NPM version](https://badge.fury.io/js/bower-files.png)](http://badge.fury.io/js/bower-files)
-[![Dependency Status](https://david-dm.org/ksmithut/bower-files.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files)
-[![devDependency Status](https://david-dm.org/ksmithut/bower-files/dev-status.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files#info=devDependencies)
-[![Build Status](https://travis-ci.org/ksmithut/bower-files.png)](https://travis-ci.org/ksmithut/bower-files)
-[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png)](https://coveralls.io/r/ksmithut/bower-files)
+[![NPM version](http://img.shields.io/npm/v/bower-files.svg)](https://www.npmjs.org/package/bower-files)
+[![Dependency Status](http://img.shields.io/gemnasium/ksmithut/bower-files.svg)](https://gemnasium.com/ksmithut/bower-files)
+[![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/bower-files.svg)](https://codeclimate.com/github/ksmithut/bower-files)
+[![Build Status](http://img.shields.io/travis/ksmithut/bower-files.svg)](https://travis-ci.org/ksmithut/bower-files)
+[![Coverage Status](http://img.shields.io/coveralls/ksmithut/bower-files.svg)](https://coveralls.io/r/ksmithut/bower-files)
 
 ## Installation
 
