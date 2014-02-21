@@ -4,10 +4,11 @@
 Please feel free to contribute bug reports, ideas and/or code when unexpected
 behavior happens.
 
+[![NPM version](https://badge.fury.io/js/bower-files.png)](http://badge.fury.io/js/bower-files)
 [![Dependency Status](https://david-dm.org/ksmithut/bower-files.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files)
 [![devDependency Status](https://david-dm.org/ksmithut/bower-files/dev-status.png?theme=shields.io)](https://david-dm.org/ksmithut/bower-files#info=devDependencies)
-[![Build Status](https://travis-ci.org/ksmithut/bower-files.png?branch=master)](https://travis-ci.org/ksmithut/bower-files)
-[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png?branch=develop)](https://coveralls.io/r/ksmithut/bower-files?branch=develop)
+[![Build Status](https://travis-ci.org/ksmithut/bower-files.png)](https://travis-ci.org/ksmithut/bower-files)
+[![Coverage Status](https://coveralls.io/repos/ksmithut/bower-files/badge.png)](https://coveralls.io/r/ksmithut/bower-files)
 
 ## Installation
 
