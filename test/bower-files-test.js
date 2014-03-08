@@ -72,22 +72,6 @@ justOneExt = function () {
   );
 };
 
-// throwError
-// ----------
-throwError = function () {
-  cd('no-bower');
-  var files, err;
-  try {
-    files = getModule();
-  } catch (exception) {
-    err = exception;
-  }
-  should(err).be.ok;
-  should(err).be.an.Error;
-  err = err.toString();
-  should(err).startWith('Error: Error reading project bower.json: ');
-};
-
 // noBower
 // -------
 noBower = function () {
@@ -97,7 +81,7 @@ noBower = function () {
   should(files).be.ok;
   should(files).be.an.Error;
   files = files.toString();
-  should(files).startWith('Error: Error reading project bower.json: ');
+  should(files).startWith('Error: Error reading project ');
 };
 
 // missingDependencies
@@ -109,7 +93,7 @@ missingDependencies = function () {
   should(files).be.ok;
   should(files).be.an.Error;
   files = files.toString();
-  should(files).startWith('Error: Missing dependency "jquery".');
+  should(files).startWith('Error: Missing dependency "jquery"');
 
   deleteCache('bower-files.js');
   cd('missing-child-dependencies');
@@ -118,7 +102,7 @@ missingDependencies = function () {
   should(files).be.ok;
   should(files).be.an.Error;
   files = files.toString();
-  should(files).startWith('Error: Missing dependency "sizzle".');
+  should(files).startWith('Error: Missing dependency "sizzle"');
 };
 
 // noMain
@@ -141,6 +125,9 @@ describe('bower-files tests', function () {
   afterEach(function () {
     cd('../');
     deleteCache('bower-files.js');
+    deleteCache('defaults.js');
+    deleteCache('exists.js');
+    deleteCache('resolve-path.js');
   });
 
   describe('Level 1', function () {
@@ -150,7 +137,6 @@ describe('bower-files tests', function () {
   });
 
   describe('Level 2', function () {
-    it('should throw an error', throwError);
     it('handles no bower.json', noBower);
     it('handles missing dependencies', missingDependencies);
     it('handles no main property', noMain);
