@@ -117,14 +117,6 @@ jsLib = bowerFiles({
 });
 ```
 
-### `options.throw` - Whether or not to throw an error or just return one if an
-error occurs.
-
-#### Default: `true`
-
-If true, this module with throw the error. Otherwise, it will just return one
-for you to handle on your own.
-
 ## Troubleshooting
 
 There are a few things that can go wrong.
