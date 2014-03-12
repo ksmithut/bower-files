@@ -1,11 +1,13 @@
 {
   "name": "bower-files",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
-  },
+    "test": "./node_modules/.bin/mocha",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly",
+    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  }},
   "repository": {
     "type": "git",
     "url": "git://github.com/ksmithut/bower-files.git"
