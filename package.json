@@ -31,7 +31,7 @@
     "gulp-util": "^2.2.14",
     "istanbul": "^0.2.6",
     "jshint-stylish": "^0.1.5",
-    "mocha": "^1.18.0",
+    "mocha": "^1.18.2",
     "mocha-lcov-reporter": "0.0.1",
     "should": "^3.1.4"
   },
