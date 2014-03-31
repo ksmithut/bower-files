@@ -34,6 +34,8 @@ libraries.
 `bower-files` is a module that allows you to automatically get the paths to your
 components, and automatically split all of the files by extension.
 
+gulp example...
+
 ```javascript
 var gulp   = require('gulp')
   , gutil  = require('gulp-util')
@@ -42,12 +44,49 @@ var gulp   = require('gulp')
   , files  = require('bower-files')()
   ;
 
-gulp.task('libjs', function () {
+gulp.task('default', function () {
   gulp.src(files.js)
     .pipe(concat('lib.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('public/js'));
 });
+```
+
+or a grunt example...
+
+```javascript
+
+var bowerFiles = require('bower-files')()
+  , jsLib      = bowerFiles.js
+  , cssLib     = bowerFiles.css
+  ;
+
+module.exports = function (grunt) {
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+      dist: {
+        files: {
+          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.js': jsLib
+        }
+      }
+    },
+    cssmin: {
+      dist: {
+        files: {
+          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.css': cssLib
+        }
+      }
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+  grunt.registerTask('default', ['uglify', 'cssmin']);
+
+};
 ```
 
 The other thing that it will do is make sure your components are in the correct
