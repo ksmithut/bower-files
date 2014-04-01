@@ -66,10 +66,10 @@ justOneExt = function () {
   should(files).be.ok;
   should(files).be.an.Array;
   should(files).have.lengthOf(1);
-  should(files[0]).be.equal(
-    __dirname +
+  should(files[0]).be.equal(path.join(
+    __dirname,
     '/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
-  );
+  ));
 };
 
 // noBower
