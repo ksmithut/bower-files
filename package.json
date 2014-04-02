@@ -1,6 +1,6 @@
 {
   "name": "bower-files",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "main": "index.js",
   "scripts": {
@@ -29,11 +29,11 @@
     "gulp-jshint": "^1.5.0",
     "gulp-mocha": "^0.4.1",
     "gulp-util": "^2.2.14",
-    "istanbul": "^0.2.6",
+    "istanbul": "^0.2.7",
     "jshint-stylish": "^0.1.5",
     "mocha": "^1.18.2",
     "mocha-lcov-reporter": "0.0.1",
-    "should": "^3.1.4"
+    "should": "^3.2.0"
   },
   "dependencies": {
     "lodash": "^2.4.1"
