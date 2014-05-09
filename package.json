@@ -24,13 +24,13 @@
   "devDependencies": {
     "coveralls": "^2.10.0",
     "gulp": "^3.6.0",
-    "gulp-exec": "^1.0.4",
+    "gulp-exec": "^2.0.1",
     "gulp-istanbul": "^0.1.1",
     "gulp-jshint": "^1.5.0",
     "gulp-mocha": "^0.4.1",
     "gulp-util": "^2.2.14",
     "istanbul": "^0.2.7",
-    "jshint-stylish": "^0.1.5",
+    "jshint-stylish": "^0.2.0",
     "mocha": "^1.18.2",
     "mocha-lcov-reporter": "0.0.1",
     "should": "^3.2.0"
