@@ -2,4 +2,6 @@ language: node_js
 node_js:
   - "0.11"
   - "0.10"
-after_success: npm run coveralls
+env:
+- secure: YluKuY1ozB5c7p8ytXMfPXUEyMNazANjsfHREqCNHe4mfVpU7e/FdLp4KcCVNdieOU9e5dZOx9HdbME1jcKnyaba19bCTxCnre8X+3yKTBdoSS693iEWgnXmm6VAcpUxXjtbnB5yZvwccJFAXuYWS25jbuQSPjvNHPOVwtMl0mw=
+after_success: npm run codeclimate

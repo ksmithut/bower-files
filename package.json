@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly",
-    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "codeclimate": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -22,18 +22,18 @@
     "url": "https://github.com/ksmithut/bower-files/issues"
   },
   "devDependencies": {
-    "coveralls": "^2.10.0",
-    "gulp": "^3.6.0",
+    "gulp": "^3.6.2",
     "gulp-exec": "^2.0.1",
-    "gulp-istanbul": "^0.1.1",
-    "gulp-jshint": "^1.5.0",
+    "gulp-istanbul": "^0.2.0",
+    "gulp-jshint": "^1.6.1",
     "gulp-mocha": "^0.4.1",
     "gulp-util": "^2.2.14",
-    "istanbul": "^0.2.7",
+    "istanbul": "^0.2.10",
     "jshint-stylish": "^0.2.0",
     "mocha": "^1.18.2",
-    "mocha-lcov-reporter": "0.0.1",
-    "should": "^3.2.0"
+    "should": "^3.3.1",
+    "mocha-lcov-reporter": "^0.0.1",
+    "codeclimate-test-reporter": "^0.0.3"
   },
   "dependencies": {
     "lodash": "^2.4.1"
