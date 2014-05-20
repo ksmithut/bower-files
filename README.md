@@ -4,7 +4,7 @@
 [![Dependency Status](http://img.shields.io/gemnasium/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
 [![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 [![Build Status](http://img.shields.io/travis/ksmithut/bower-files.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
-[![Coverage Status](http://img.shields.io/coveralls/ksmithut/bower-files.svg?style=flat)](https://coveralls.io/r/ksmithut/bower-files)
+[![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://coveralls.io/r/ksmithut/bower-files)
 
 Although tested, this module may not work as expected.
 Please feel free to contribute bug reports, ideas and/or code when unexpected
