@@ -36,6 +36,7 @@
     "codeclimate-test-reporter": "^0.0.3"
   },
   "dependencies": {
+    "glob": "^4.0.2",
     "lodash": "^2.4.1"
   }
 }
