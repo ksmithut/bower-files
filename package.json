@@ -1,6 +1,6 @@
 {
   "name": "bower-files",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "main": "index.js",
   "scripts": {
@@ -22,20 +22,21 @@
     "url": "https://github.com/ksmithut/bower-files/issues"
   },
   "devDependencies": {
-    "gulp": "^3.6.2",
+    "codeclimate-test-reporter": "^0.0.3",
+    "gulp": "^3.7.0",
     "gulp-exec": "^2.0.1",
     "gulp-istanbul": "^0.2.0",
     "gulp-jshint": "^1.6.1",
     "gulp-mocha": "^0.4.1",
-    "gulp-util": "^2.2.14",
+    "gulp-util": "^2.2.15",
     "istanbul": "^0.2.10",
     "jshint-stylish": "^0.2.0",
-    "mocha": "^1.18.2",
-    "should": "^3.3.1",
+    "mocha": "^1.20.0",
     "mocha-lcov-reporter": "^0.0.1",
-    "codeclimate-test-reporter": "^0.0.3"
+    "should": "^3.3.1"
   },
   "dependencies": {
+    "glob": "^4.0.2",
     "lodash": "^2.4.1"
   }
 }

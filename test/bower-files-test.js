@@ -5,6 +5,7 @@ var should = require('should')
   , cwd    = process.cwd()
   , cd, getModule, deleteCache
   , override
+  , globs
   , justArray
   , justOneExt
   , throwError
@@ -39,6 +40,21 @@ override = function () {
   should(files.js).be.an.Array;
   pathToJquery = require.resolve(pathToJquery);
   should(files.js).containEql(pathToJquery);
+};
+
+// globs
+// -----
+globs = function () {
+  cd('globs');
+  var files = getModule();
+
+  should(files).be.ok;
+  should(files).be.an.Object;
+  ['eot', 'svg', 'ttf', 'woff'].map(function (fontExt) {
+    should(files).have.property(fontExt);
+    should(files[fontExt]).be.an.Array;
+    should(files[fontExt][0]).eql(path.resolve('./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.' + fontExt));
+  });
 };
 
 // justArray
@@ -132,6 +148,7 @@ describe('bower-files tests', function () {
 
   describe('Level 1', function () {
     it('should use the override', override);
+    it('should handle glob files', globs);
     it('should get list of files without being split by extension', justArray);
     it('should get only the files with a certain extension', justOneExt);
   });
