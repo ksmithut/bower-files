@@ -1,0 +1,33 @@
+{
+  "name": "angular-test-scaffold",
+  "version": "0.3.5",
+  "authors": [
+    "Andrew C. Greenberg <wizardwerdna@gmail.com>"
+  ],
+  "description": "Test Scaffold for AngularJS Projects",
+  "main": "plugin.js",
+  "keywords": [
+    "test",
+    "karma",
+    "angularjs",
+    "keypress"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/wizardwerdna/angular-test-scaffold",
+  "_release": "0.3.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.5",
+    "commit": "57b73eb764ebfb55c3576832d63a5b88f6d5d8ac"
+  },
+  "_source": "git://github.com/wizardwerdna/angular-test-scaffold.git",
+  "_target": "~0.3.5",
+  "_originalSource": "angular-test-scaffold"
+}
