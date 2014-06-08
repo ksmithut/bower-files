@@ -126,6 +126,10 @@ set up your bower components to go.
 
 #### Default: `bower_components`
 
+### `options.dev` - Boolean. Whether or not to include devDependencies.
+
+#### Default: `false`
+
 The same path logic as with the `options.json` path applies here as well.
 
 ### `options.ext` - Whether or not to split up the dependencies by extension.
