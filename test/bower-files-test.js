@@ -5,6 +5,7 @@ var should = require('should')
   , cwd    = process.cwd()
   , cd, getModule, deleteCache
   , devDependencies
+  , noDevDependencies
   , override
   , globs
   , justArray
@@ -103,6 +104,19 @@ devDependencies = function () {
   should(files).have.lengthOf(4);
 };
 
+// noDevDependencies
+// ---------------
+noDevDependencies = function () {
+  cd('dev-dependencies');
+  var files = getModule({
+    ext: 'js'
+  });
+
+  should(files).be.ok;
+  should(files).be.an.Array;
+  should(files).have.lengthOf(3);
+};
+
 // noBower
 // -------
 noBower = function () {
@@ -167,6 +181,7 @@ describe('bower-files tests', function () {
     it('should get list of files without being split by extension', justArray);
     it('should get only the files with a certain extension', justOneExt);
     it('should get devDependencies when option is given', devDependencies);
+    it('should not get devDependencies when option is not given', noDevDependencies);
   });
 
   describe('Level 2', function () {
