@@ -38,13 +38,13 @@ describe('bower-files tests', function () {
 // ----------------
 function cd(dir) {
   process.chdir(path.join(__dirname, dir));
-};
+}
 function getModule(options) {
   return require('../lib/bower-files.js')(options);
-};
+}
 function deleteCache(filepath) {
   delete require.cache[require.resolve('../lib/' + filepath)];
-};
+}
 
 // override
 // --------
@@ -60,7 +60,7 @@ function override() {
   should(files.js).be.an.Array;
   pathToJquery = require.resolve(pathToJquery);
   should(files.js).containEql(pathToJquery);
-};
+}
 
 // globs
 // -----
@@ -75,7 +75,7 @@ function globs() {
     should(files[fontExt]).be.an.Array;
     should(files[fontExt][0]).eql(path.resolve('./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.' + fontExt));
   });
-};
+}
 
 // justArray
 // ---------
@@ -89,7 +89,7 @@ function justArray() {
   should(files).be.ok;
   should(files).be.an.Array;
   should(files).have.lengthOf(3);
-};
+}
 
 // justOneExt
 // ----------
@@ -106,7 +106,7 @@ function justOneExt() {
     __dirname,
     '/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
   ));
-};
+}
 
 // devDependencies
 // ---------------
@@ -120,7 +120,7 @@ function devDependencies() {
   should(files).be.ok;
   should(files).be.an.Array;
   should(files).have.lengthOf(4);
-};
+}
 
 // noDevDependencies
 // ---------------
@@ -133,7 +133,7 @@ function noDevDependencies() {
   should(files).be.ok;
   should(files).be.an.Array;
   should(files).have.lengthOf(3);
-};
+}
 
 // noBower
 // -------
@@ -145,7 +145,7 @@ function noBower() {
   should(files).be.an.Error;
   files = files.toString();
   should(files).startWith('Error: Error reading project ');
-};
+}
 
 // missingDependencies
 // -------------------
@@ -166,7 +166,7 @@ function missingDependencies() {
   should(files).be.an.Error;
   files = files.toString();
   should(files).startWith('Error: Missing dependency "sizzle"');
-};
+}
 
 // noMain
 // ------
@@ -178,4 +178,4 @@ function noMain() {
   should(files).be.an.Error;
   files = files.toString();
   should(files).startWith('Error: No main property: "jquery".');
-};
+}
