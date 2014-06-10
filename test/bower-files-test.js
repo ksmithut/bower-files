@@ -1,166 +1,8 @@
 'use strict';
 
-var should = require('should')
-  , path   = require('path')
-  , cwd    = process.cwd()
-  , cd, getModule, deleteCache
-  , devDependencies
-  , noDevDependencies
-  , override
-  , globs
-  , justArray
-  , justOneExt
-  , throwError
-  , noBower
-  , missingDependencies
-  , noMain
-  ;
-
-// Helper functions
-// ----------------
-cd = function (dir) {
-  process.chdir(path.join(__dirname, dir));
-};
-getModule = function (options) {
-  return require('../lib/bower-files.js')(options);
-};
-deleteCache = function (filepath) {
-  delete require.cache[require.resolve('../lib/' + filepath)];
-};
-
-// override
-// --------
-override = function () {
-  cd('override');
-  var files        = getModule()
-    , pathToJquery = './override/bower_components/jquery/dist/jquery.min.js'
-    ;
-
-  should(files).be.ok;
-  should(files).be.an.Object;
-  should(files).have.property('js');
-  should(files.js).be.an.Array;
-  pathToJquery = require.resolve(pathToJquery);
-  should(files.js).containEql(pathToJquery);
-};
-
-// globs
-// -----
-globs = function () {
-  cd('globs');
-  var files = getModule();
-
-  should(files).be.ok;
-  should(files).be.an.Object;
-  ['eot', 'svg', 'ttf', 'woff'].map(function (fontExt) {
-    should(files).have.property(fontExt);
-    should(files[fontExt]).be.an.Array;
-    should(files[fontExt][0]).eql(path.resolve('./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.' + fontExt));
-  });
-};
-
-// justArray
-// ---------
-justArray = function () {
-  cd('just-array');
-  var files = getModule({
-    json: path.join(__dirname, 'just-array/bower.json'),
-    ext: false
-  });
-
-  should(files).be.ok;
-  should(files).be.an.Array;
-  should(files).have.lengthOf(3);
-};
-
-// justOneExt
-// ----------
-justOneExt = function () {
-  cd('just-one-ext');
-  var files = getModule({
-    ext: 'css'
-  });
-
-  should(files).be.ok;
-  should(files).be.an.Array;
-  should(files).have.lengthOf(1);
-  should(files[0]).be.equal(path.join(
-    __dirname,
-    '/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
-  ));
-};
-
-// devDependencies
-// ---------------
-devDependencies = function () {
-  cd('dev-dependencies');
-  var files = getModule({
-    dev: true,
-    ext: 'js'
-  });
-
-  should(files).be.ok;
-  should(files).be.an.Array;
-  should(files).have.lengthOf(4);
-};
-
-// noDevDependencies
-// ---------------
-noDevDependencies = function () {
-  cd('dev-dependencies');
-  var files = getModule({
-    ext: 'js'
-  });
-
-  should(files).be.ok;
-  should(files).be.an.Array;
-  should(files).have.lengthOf(3);
-};
-
-// noBower
-// -------
-noBower = function () {
-  cd('no-bower');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Error reading project ');
-};
-
-// missingDependencies
-// -------------------
-missingDependencies = function () {
-  cd('missing-dependencies');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Missing dependency "jquery"');
-
-  deleteCache('bower-files.js');
-  cd('missing-child-dependencies');
-  files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Missing dependency "sizzle"');
-};
-
-// noMain
-// ------
-noMain = function () {
-  cd('no-main');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: No main property: "jquery".');
-};
+var should = require('should');
+var path   = require('path');
+var cwd    = process.cwd();
 
 // Tests
 // -----
@@ -191,3 +33,149 @@ describe('bower-files tests', function () {
   });
 
 });
+
+// Helper functions
+// ----------------
+function cd(dir) {
+  process.chdir(path.join(__dirname, dir));
+};
+function getModule(options) {
+  return require('../lib/bower-files.js')(options);
+};
+function deleteCache(filepath) {
+  delete require.cache[require.resolve('../lib/' + filepath)];
+};
+
+// override
+// --------
+function override() {
+  cd('override');
+  var files        = getModule()
+    , pathToJquery = './override/bower_components/jquery/dist/jquery.min.js'
+    ;
+
+  should(files).be.ok;
+  should(files).be.an.Object;
+  should(files).have.property('js');
+  should(files.js).be.an.Array;
+  pathToJquery = require.resolve(pathToJquery);
+  should(files.js).containEql(pathToJquery);
+};
+
+// globs
+// -----
+function globs() {
+  cd('globs');
+  var files = getModule();
+
+  should(files).be.ok;
+  should(files).be.an.Object;
+  ['eot', 'svg', 'ttf', 'woff'].map(function (fontExt) {
+    should(files).have.property(fontExt);
+    should(files[fontExt]).be.an.Array;
+    should(files[fontExt][0]).eql(path.resolve('./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.' + fontExt));
+  });
+};
+
+// justArray
+// ---------
+function justArray() {
+  cd('just-array');
+  var files = getModule({
+    json: path.join(__dirname, 'just-array/bower.json'),
+    ext: false
+  });
+
+  should(files).be.ok;
+  should(files).be.an.Array;
+  should(files).have.lengthOf(3);
+};
+
+// justOneExt
+// ----------
+function justOneExt() {
+  cd('just-one-ext');
+  var files = getModule({
+    ext: 'css'
+  });
+
+  should(files).be.ok;
+  should(files).be.an.Array;
+  should(files).have.lengthOf(1);
+  should(files[0]).be.equal(path.join(
+    __dirname,
+    '/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
+  ));
+};
+
+// devDependencies
+// ---------------
+function devDependencies() {
+  cd('dev-dependencies');
+  var files = getModule({
+    dev: true,
+    ext: 'js'
+  });
+
+  should(files).be.ok;
+  should(files).be.an.Array;
+  should(files).have.lengthOf(4);
+};
+
+// noDevDependencies
+// ---------------
+function noDevDependencies() {
+  cd('dev-dependencies');
+  var files = getModule({
+    ext: 'js'
+  });
+
+  should(files).be.ok;
+  should(files).be.an.Array;
+  should(files).have.lengthOf(3);
+};
+
+// noBower
+// -------
+function noBower() {
+  cd('no-bower');
+  var files = getModule({throw: false});
+
+  should(files).be.ok;
+  should(files).be.an.Error;
+  files = files.toString();
+  should(files).startWith('Error: Error reading project ');
+};
+
+// missingDependencies
+// -------------------
+function missingDependencies() {
+  cd('missing-dependencies');
+  var files = getModule({throw: false});
+
+  should(files).be.ok;
+  should(files).be.an.Error;
+  files = files.toString();
+  should(files).startWith('Error: Missing dependency "jquery"');
+
+  deleteCache('bower-files.js');
+  cd('missing-child-dependencies');
+  files = getModule({throw: false});
+
+  should(files).be.ok;
+  should(files).be.an.Error;
+  files = files.toString();
+  should(files).startWith('Error: Missing dependency "sizzle"');
+};
+
+// noMain
+// ------
+function noMain() {
+  cd('no-main');
+  var files = getModule({throw: false});
+
+  should(files).be.ok;
+  should(files).be.an.Error;
+  files = files.toString();
+  should(files).startWith('Error: No main property: "jquery".');
+};
