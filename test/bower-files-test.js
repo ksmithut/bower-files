@@ -1,5 +1,6 @@
 'use strict';
 
+var fs     = require('fs');
 var should = require('should');
 var path   = require('path');
 var cwd    = process.cwd();
@@ -27,6 +28,7 @@ describe('bower-files tests', function () {
   });
 
   describe('Level 2', function () {
+    it('handles symbolic links', symbolicLinks);
     it('handles no bower.json', noBower);
     it('handles missing dependencies', missingDependencies);
     it('handles no main property', noMain);
@@ -146,6 +148,29 @@ function noBower() {
   files = files.toString();
   should(files).startWith('Error: Error reading project ');
 }
+
+// symbolicLinks
+// -------------
+function symbolicLinks() {
+  var source     = path.join(__dirname, 'symlinks/angular');
+  var dest       = path.join(__dirname, 'symlinks/bower_components/angular');
+  var expectedJS = path.join(__dirname, 'symlinks/bower_components/angular/angular.js');
+
+  try {
+    fs.symlinkSync(source, dest);
+    cd('symlinks');
+    var files = getModule({ext: 'js'});
+
+    should(files).be.ok;
+    should(files).be.an.Array;
+    should(files).have.lengthOf(1);
+    should(files[0]).be.equal(expectedJS);
+  } catch(err) {
+    throw err;
+  } finally {
+    fs.unlinkSync(dest);
+  }
+};
 
 // missingDependencies
 // -------------------
