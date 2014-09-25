@@ -6,3 +6,5 @@ test
 .jshintrc
 .travis.yml
 gulpfile.js
+npm-debug-log
+.DS_Store
