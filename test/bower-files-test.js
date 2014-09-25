@@ -27,6 +27,14 @@ describe('bower-files tests', function () {
       expect(files.js).to.contain(pathToJquery);
     });
 
+    it('should join extensions into a single property', function () {
+      cd('join');
+      var files = getModule({join: {fonts: ['eot', 'svg', 'ttf', 'woff', 'otf']}});
+      expect(files).to.be.an(Object);
+      expect(files.fonts).to.be.an(Array);
+      expect(files.fonts.length).to.be(4);
+    });
+
     it('should handle glob files', function () {
       cd('globs');
       var files = getModule();
