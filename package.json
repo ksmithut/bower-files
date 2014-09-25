@@ -36,7 +36,10 @@
     "should": "^4.0.4"
   },
   "dependencies": {
+    "defaults": "^1.0.0",
     "glob": "^4.0.5",
-    "lodash": "^2.4.1"
+    "is-relative": "^0.1.1",
+    "lodash": "^2.4.1",
+    "merge": "^1.2.0"
   }
 }

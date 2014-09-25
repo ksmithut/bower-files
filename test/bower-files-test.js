@@ -42,7 +42,7 @@ function cd(dir) {
   process.chdir(path.join(__dirname, dir));
 }
 function getModule(options) {
-  return require('../lib/bower-files.js')(options);
+  return require('../')(options);
 }
 function deleteCache(filepath) {
   delete require.cache[require.resolve('../lib/' + filepath)];
@@ -141,12 +141,10 @@ function noDevDependencies() {
 // -------
 function noBower() {
   cd('no-bower');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Error reading project ');
+  var error;
+  try { var files = getModule(); }
+  catch (e) { error = e; }
+  should(error).be.an.Error;
 }
 
 // symbolicLinks
@@ -176,31 +174,26 @@ function symbolicLinks() {
 // -------------------
 function missingDependencies() {
   cd('missing-dependencies');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Missing dependency "jquery"');
+  var error;
+  try { var files = getModule(); }
+  catch (e) { error = e; }
+  should(error).be.an.Error;
+  error = null;
 
   deleteCache('bower-files.js');
   cd('missing-child-dependencies');
-  files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: Missing dependency "sizzle"');
+  try { var files = getModule(); }
+  catch (e) { error = e; }
+  should(error).be.an.Error;
+  error = null;
 }
 
 // noMain
 // ------
 function noMain() {
   cd('no-main');
-  var files = getModule({throw: false});
-
-  should(files).be.ok;
-  should(files).be.an.Error;
-  files = files.toString();
-  should(files).startWith('Error: No main property: "jquery".');
+  var error;
+  try { var files = getModule(); }
+  catch (e) { error = e; }
+  should(error).be.an.Error;
 }
