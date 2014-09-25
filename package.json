@@ -23,23 +23,16 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.0.3",
-    "gulp": "^3.8.7",
-    "gulp-exec": "^2.1.0",
-    "gulp-istanbul": "^0.2.1",
-    "gulp-jshint": "^1.8.4",
-    "gulp-mocha": "^0.5.2",
-    "gulp-util": "^3.0.0",
-    "istanbul": "^0.3.0",
-    "jshint-stylish": "^0.4.0",
+    "expect.js": "^0.3.1",
+    "istanbul": "^0.3.2",
+    "jshint-stylish": "^1.0.0",
     "mocha": "^1.21.4",
-    "mocha-lcov-reporter": "^0.0.1",
-    "should": "^4.0.4"
+    "mocha-lcov-reporter": "^0.0.1"
   },
   "dependencies": {
     "defaults": "^1.0.0",
-    "glob": "^4.0.5",
+    "glob": "^4.0.6",
     "is-relative": "^0.1.1",
-    "lodash": "^2.4.1",
     "merge": "^1.2.0"
   }
 }
