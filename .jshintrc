@@ -20,7 +20,7 @@
   "trailing"      : true,
   "maxparams"     : 4,
   "maxdepth"      : 4,
-  "maxstatements" : 16,
+  "maxstatements" : 10,
   "maxcomplexity" : 7,
   "maxlen"        : 80,
 
@@ -49,5 +49,14 @@
   "supernew"      : false,
 
   "browser"       : true,
-  "node"          : true
+  "node"          : true,
+
+  "globals"       : {
+    "describe"    : false,
+    "it"          : false,
+    "before"      : false,
+    "beforeEach"  : false,
+    "after"       : false,
+    "afterEach"   : false
+  }
 }
