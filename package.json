@@ -22,7 +22,7 @@
     "url": "https://github.com/ksmithut/bower-files/issues"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.0.3",
+    "codeclimate-test-reporter": "0.0.4",
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.2",
     "jshint-stylish": "^1.0.0",

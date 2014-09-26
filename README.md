@@ -6,46 +6,63 @@
 [![Build Status](http://img.shields.io/travis/ksmithut/bower-files.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 
-Although tested, this module may not work as expected.
-Please feel free to contribute bug reports, ideas and/or code when unexpected
-behavior happens.
+Helps you dynamically include your bower components into your build process.
+
+**The Problem**
+
+Bower is a great tool to bring in your front-end dependencies (and their
+dependencies) to your project. But if you want them to be included in your build
+process, you need to manually enter them in to your build process. If you add
+or remove dependencies, you need to modify your build process configuration
+files.
+
+**The Solution**
+
+`bower-files` aims to simplify your build process setup by dynamically getting
+the library files for you to include in whatever build process you use. It
+splits up the files by extension, and puts them in the order they need to be in,
+in order to work correctly in the browser.
+
+## 2.x (Ch-ch-ch-changes)
+
+There are breaking changes in 2.x. Mostly, it will just throw errors as they
+happen. The more I used this, the more I found it was hard to debug because I
+didn't check if bower-files failed in my gulpfile and some build process would
+fail. Checking for errors also made the module more complex and harder to
+manage.
+
+A `join` option is now available! Check in the options below to see how it
+works! I put it in there because I was often having to manually group font files
+to copy them into my build directory.
+
+The code was refactored a bit and I 'reworded' the tests. Still have 100% test
+coverage, but the tests could probably still be fleshed out a bit better. Feel
+free to contribute and modify the tests! But I'd still like to maintain 100%
+code coverage.
+
+I also removed `lodash` as a dependency. 1MB! Although it was the only
+dependency, I figured that I could find some smaller modules (or roll my own)
+that did the same things. Although this makes more modules to keep updated, it
+reduces total size by a lot (reduced by about 944kb).
 
 ## Installation
 
 ```bash
-$ npm install bower-files --save
+npm install bower-files --save-dev
 ```
 
 ## Usage
 
-This module is meant to help you manage your bower components and use them with task runners such as `grunt` and `gulp`.
-
-**The Problem**
-
-So you use bower to manage your project's front-end dependencies. That's great,
-but then when you want to include those packages in your build scripts, what
-then? You could have an additional config file that defines which components to
-use and the paths to them, but that's just one more thing to manage. You use
-bower so you don't have to have that additional step of managing your front-end
-libraries.
-
-**The Solution**
-
-`bower-files` is a module that allows you to automatically get the paths to your
-components, and automatically split all of the files by extension.
-
 gulp example...
 
 ```javascript
-var gulp   = require('gulp')
-  , gutil  = require('gulp-util')
-  , concat = require('gulp-concat')
-  , uglify = require('gulp-uglify')
-  , files  = require('bower-files')()
-  ;
+var gulp   = require('gulp');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var lib    = require('bower-files')();
 
 gulp.task('default', function () {
-  gulp.src(files.js)
+  gulp.src(lib.js)
     .pipe(concat('lib.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('public/js'));
@@ -56,10 +73,7 @@ or a grunt example...
 
 ```javascript
 
-var bowerFiles = require('bower-files')()
-  , jsLib      = bowerFiles.js
-  , cssLib     = bowerFiles.css
-  ;
+var lib = require('bower-files')();
 
 module.exports = function (grunt) {
 
@@ -68,14 +82,14 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.js': jsLib
+          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.js': lib.js
         }
       }
     },
     cssmin: {
       dist: {
         files: {
-          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.css': cssLib
+          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.css': lib.css
         }
       }
     }
@@ -89,13 +103,10 @@ module.exports = function (grunt) {
 };
 ```
 
-The other thing that it will do is make sure your components are in the correct
-order with the most dependeded upon script being first.
-
 *Other Solutions*
 
-Internally, there are other modules that do this same thing. Perhaps they may
-have suggestions for this module and end up using it:
+There are other modules that do this same thing. Perhaps they may have
+suggestions for this module and end up using it:
 
 - [`gulp-bower-files`](https://www.npmjs.org/package/gulp-bower-files)
 
@@ -105,72 +116,72 @@ You can pass options into the function call to customize what you get:
 
 ```javascript
 var bowerFiles = require('bower-files')
-  , jsLib
-  ;
-jsLib = bowerFiles({
-  ext: 'js'
+var jsLib      = bowerFiles({ext: 'js'});
+```
+
+* `options.cwd` - Your current working directory to look for `bower.json` and
+`bower_components`. MUST be an absolute path. Default: `process.cwd()`
+
+* `options.json` - The path to your `bower.json` file. Could be
+`components.json` if you wanted! If you use a relative path, it will prepend the
+`options.cwd`. If you use an absolute path, it will ignore the `options.cwd`.
+Default: `'bower.json'`
+
+* `options.dir` - The path to your `bower_components`. Same as options.json in
+relation to your `options.cwd`. Default: `'bower_components'`
+
+* `options.componentJson` - The filename that shows up from `bower` in each
+component that contains sub-dependencies and it's 'main' declaration. Default:
+`.bower.json`
+
+* `options.symlinkedJson` - The filename that shows up from `bower` for
+symlinked components. Default: `bower.json`
+
+* `options.ext` (Boolean/String) - Whether or not to split up the dependencies
+by extension. If a String is passed, it will only return the files witht the
+given extension (don't include the '.'). Default: `true`
+
+* `options.dev` (Boolean) - Whether or not to include devDependencies. Default:
+`false`
+
+* `options.join` (Object) - You can specify `join` specifications to join
+certain extensions into a single group.
+
+Example:
+
+```javascript
+var lib = require('bower-files')({
+  join: {fonts: ['eot', 'woff', 'svg', 'ttf']}
+});
+console.log(lib.fonts);
+// now lib.fonts includes all .eot, .woff, .svg, and .ttf files
+```
+
+Default: `false`
+
+* `options.overrides` (Object) - An overrides object to override specific
+package main files. Occasionally, you'll find a bower component that has no
+defined `main` property. So here, you pass in an object that looks like this:
+
+```javascript
+var lib = require('bower-files')({
+  overrides: {
+    jQuery: {
+      main: './dist/jquery.min.js'
+    }
+  }
 });
 ```
 
-### `options.json` - The path to your `bower.json` or other such files
-
-#### Default: `bower.json`
-
-If the path given is an absolute path (meaning that it starts with `/`), then it
-will read the file given. If it is a relative path, then it will join the
-relative path with `process.cwd()`. So the default value ends up being:
-`process.cwd() + '/bower.json'`.
-
-### `options.dir` - The path to your `bower_components` or wherever your have
-set up your bower components to go.
-
-#### Default: `bower_components`
-
-### `options.dev` - Boolean. Whether or not to include devDependencies.
-
-#### Default: `false`
-
-The same path logic as with the `options.json` path applies here as well.
-
-### `options.ext` - Whether or not to split up the dependencies by extension.
-
-#### Default: `true`
-
-If true, then the resulting object will look something like this:
-
-```javascript
-{
-  js: [/* array of javascript files*/],
-  css: [/* array of css files */]
-  /* any other file extensions that may have been included. */
-}
-```
-
-If false, then the result will be an array of all of the files.
-
-If it's a string, then it will return an array of the files with the given
-extension.
-
-```javascript
-var bowerFiles = require('bower-files')
-  , jsLib
-  ;
-jsLib = bowerFiles({
-  ext: 'js'
-});
-```
+Note that you can also add this POJO into `bower.json` in `JSON` form, but if
+you specify an overrides directly when calling `bower-files`, it will override
+the `bower.json` version.
 
 ## Troubleshooting
 
 There are a few things that can go wrong.
 
-If it cannot find your `bower.json` or
-whatever file you determine, the resulting object will be an error like:
-`Error reading project bower.json`.
-
-If it cannot find a dependency defined in your `bower.json` or one of the child
-dependencies, it's likely because you need to run `bower install`, but it will
-return an Error object like: `Missing dependency "jquery".`;
+Make sure you `bower install`. That will solve a lot of your issues.
 
 Occasionally, you will come across a bower component that doesn't have a `main`
 property defined in it's `bower.json` (jQuery didn't used to have it). Because
@@ -193,31 +204,9 @@ like this:
 
 The main property can be a string representing the relative path within the
 component directory to the main file to be included, or it can be an array of
-relative paths.
+relative paths, or even a relative glob.
 
 ## Development
-
-This project uses [`gulp`](http://gulpjs.com/) for task automation.
-
-```bash
-$ npm install -g gulp
-```
-
-Here are the three tasks available to use:
-
-* `gulp hint`: runs all pertinent code against jshint. The rules are the ones
-defined in [`.jshintrc`](.jshintrc)
-
-* `gulp test`: runs all tests with
-[`mocha`](http://visionmedia.github.io/mocha/) for passing and
-[`instanbul`](http://gotwarlost.github.io/istanbul/) for code coverage. It
-generates html files showing the code coverage.
-
-* `gulp docs`: builds out all of the documentation using
-[`docco`](http://jashkenas.github.io/docco/). Note that you need to have docco
-installed (`npm install -g docco`). I at one time at docco part of the dev
-dependencies, but now I don't. I may be open to putting it back, but I just
-wanted to keep the package as small as possible.
 
 You can also run `npm test`, and it does basically does the same thing as
 `gulp test`, but an error will be thrown because it does some more istanbul
