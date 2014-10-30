@@ -27,6 +27,13 @@ describe('bower-files tests', function () {
       expect(files.js).to.contain(pathToJquery);
     });
 
+    it('should use the override for dependencies', function () {
+      cd('override-dependencies');
+      var files = getModule();
+      expect(files).to.be.an(Object);
+      expect(files.js).to.be(undefined);
+    });
+
     it('should join extensions into a single property', function () {
       cd('join');
       var files = getModule({join: {fonts: ['eot', 'svg', 'ttf', 'woff', 'otf']}});

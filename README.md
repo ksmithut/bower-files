@@ -167,7 +167,8 @@ defined `main` property. So here, you pass in an object that looks like this:
 var lib = require('bower-files')({
   overrides: {
     jQuery: {
-      main: './dist/jquery.min.js'
+      main: './dist/jquery.min.js',
+      dependencies: {}
     }
   }
 });
