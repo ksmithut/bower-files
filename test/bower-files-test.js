@@ -34,6 +34,16 @@ describe('bower-files tests', function () {
       expect(files.js).to.be(undefined);
     });
 
+    it('should use the main file when self option is set', function () {
+      cd('self-main');
+      var files = getModule({self: true});
+      expect(files).to.be.an(Object);
+      expect(files.js).to.be.an(Array);
+      expect(files.js[0]).to.contain('jquery');
+      expect(files.js[1]).to.contain('bootstrap');
+      expect(files.js[2]).to.be(path.join(__dirname, 'self-main/lib/fastclick.js'));
+    });
+
     it('should join extensions into a single property', function () {
       cd('join');
       var files = getModule({join: {fonts: ['eot', 'svg', 'ttf', 'woff', 'otf']}});
