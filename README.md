@@ -138,11 +138,14 @@ component that contains sub-dependencies and it's 'main' declaration. Default:
 symlinked components. Default: `bower.json`
 
 * `options.ext` (Boolean/String) - Whether or not to split up the dependencies
-by extension. If a String is passed, it will only return the files witht the
+by extension. If a String is passed, it will only return the files with the
 given extension (don't include the '.'). Default: `true`
 
 * `options.dev` (Boolean) - Whether or not to include devDependencies. Default:
 `false`
+
+* `options.self` (Boolean) - Whether or not to include the `main` definition in
+the given `bower.json` file.
 
 * `options.join` (Object) - You can specify `join` specifications to join
 certain extensions into a single group.
