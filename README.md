@@ -3,7 +3,7 @@
 [![NPM version](http://img.shields.io/npm/v/bower-files.svg?style=flat)](https://www.npmjs.org/package/bower-files)
 [![Dependency Status](http://img.shields.io/gemnasium/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
 [![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
-[![Build Status](http://img.shields.io/travis/ksmithut/bower-files.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
+[![Build Status](http://img.shields.io/travis/ksmithut/bower-files/master.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 
 Helps you dynamically include your bower components into your build process.
