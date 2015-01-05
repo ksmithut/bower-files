@@ -11,7 +11,7 @@ describe('bower-files tests', function () {
 
   // After each, reset the `process.cwd()`
   afterEach(function () {
-    cd('../');
+    cd('../../');
     deleteCache('index.js');
   });
 
@@ -20,7 +20,7 @@ describe('bower-files tests', function () {
     it('should use the override', function () {
       cd('override');
       var files        = getModule();
-      var pathToJquery = './override/bower_components/jquery/dist/jquery.min.js';
+      var pathToJquery = './2x-fixtures/override/bower_components/jquery/dist/jquery.min.js';
       expect(files).to.be.an(Object);
       expect(files.js).to.be.an(Array);
       pathToJquery = require.resolve(pathToJquery);
@@ -41,7 +41,7 @@ describe('bower-files tests', function () {
       expect(files.js).to.be.an(Array);
       expect(files.js[0]).to.contain('jquery');
       expect(files.js[1]).to.contain('bootstrap');
-      expect(files.js[2]).to.be(path.join(__dirname, 'self-main/lib/fastclick.js'));
+      expect(files.js[2]).to.be(path.join(__dirname, '2x-fixtures/self-main/lib/fastclick.js'));
     });
 
     it('should join extensions into a single property', function () {
@@ -65,7 +65,7 @@ describe('bower-files tests', function () {
     it('should get list of files without being split by extension', function () {
       cd('just-array');
       var files = getModule({
-        json: path.join(__dirname, 'just-array/bower.json'),
+        json: path.join(__dirname, '2x-fixtures/just-array/bower.json'),
         ext: false
       });
       expect(files).to.be.an(Array);
@@ -79,7 +79,7 @@ describe('bower-files tests', function () {
       expect(files.length).to.be(1);
       expect(files[0]).be.equal(path.join(
         __dirname,
-        '/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
+        '2x-fixtures/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
       ));
     });
 
@@ -101,9 +101,9 @@ describe('bower-files tests', function () {
     });
 
     it('should follow symbolic links', function () {
-      var source     = path.join(__dirname, 'symlinks/angular');
-      var dest       = path.join(__dirname, 'symlinks/bower_components/angular');
-      var expectedJS = path.join(__dirname, 'symlinks/bower_components/angular/angular.js');
+      var source     = path.join(__dirname, '2x-fixtures/symlinks/angular');
+      var dest       = path.join(__dirname, '2x-fixtures/symlinks/bower_components/angular');
+      var expectedJS = path.join(__dirname, '2x-fixtures/symlinks/bower_components/angular/angular.js');
       try {
         fs.symlinkSync(source, dest);
         cd('symlinks');
@@ -160,7 +160,7 @@ describe('bower-files tests', function () {
 // Helper functions
 // ----------------
 function cd(dir) {
-  process.chdir(path.join(__dirname, dir));
+  process.chdir(path.join(__dirname, '2x-fixtures', dir));
 }
 function getModule(options) {
   return require('../')(options);
