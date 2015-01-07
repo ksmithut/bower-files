@@ -145,8 +145,51 @@ describe('BowerFiles', function () {
     it('should not have duplicate files', function () {
       cd('duplicate');
       var files = new BowerFiles();
-      var cwd   = process.cwd();
-      expect(files.files).to.have.length(13);
+      expect(files.files).to.have.length(11);
+    });
+
+    it('should get self files', function () {
+      cd('duplicate');
+      var files = new BowerFiles();
+      var cwd = process.cwd();
+      var dir = path.join(cwd, 'bower_components');
+      var bs  = path.join(dir, 'bootstrap');
+      expect(files.self().files).to.be.eql([
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(bs, 'less', 'bootstrap.less'),
+        path.join(bs, 'dist', 'css', 'bootstrap.css'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.eot'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.svg'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.ttf'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.woff'),
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-route', 'angular-route.js'),
+        path.join(dir, 'angular-animate', 'angular-animate.js'),
+        path.join(cwd, 'dist', 'helpers.js'),
+        path.join(cwd, 'dist', 'main.js')
+      ]);
+    });
+
+    it('should get dev files', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd = process.cwd();
+      var dir = path.join(cwd, 'bower_components');
+      var bs = path.join(dir, 'bootstrap');
+      expect(files.dev().files).to.be.eql([
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-animate', 'angular-animate.js'),
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(bs, 'less', 'bootstrap.less'),
+        path.join(bs, 'dist', 'css', 'bootstrap.css'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.eot'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.svg'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.ttf'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.woff'),
+        path.join(dir, 'angular-route', 'angular-route.js')
+      ]);
     });
 
   });
