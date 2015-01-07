@@ -120,8 +120,8 @@ describe('BowerFiles', function () {
       /* jshint maxstatements: false */
       cd('symlink');
       var symlinkDir = path.join(__dirname, 'fixtures', 'symlink');
-      var src  = path.join(symlinkDir, 'angular');
-      var dest = path.join(symlinkDir, 'bower_components', 'angular');
+      var src        = path.join(symlinkDir, 'angular');
+      var dest       = path.join(symlinkDir, 'bower_components', 'angular');
       var error;
       try {
         fs.symlinkSync(src, dest);
@@ -151,9 +151,9 @@ describe('BowerFiles', function () {
     it('should get self files', function () {
       cd('duplicate');
       var files = new BowerFiles();
-      var cwd = process.cwd();
-      var dir = path.join(cwd, 'bower_components');
-      var bs  = path.join(dir, 'bootstrap');
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
       expect(files.self().files).to.be.eql([
         path.join(dir, 'jquery', 'dist', 'jquery.js'),
         path.join(bs, 'less', 'bootstrap.less'),
@@ -174,9 +174,9 @@ describe('BowerFiles', function () {
     it('should get dev files', function () {
       cd('default');
       var files = new BowerFiles();
-      var cwd = process.cwd();
-      var dir = path.join(cwd, 'bower_components');
-      var bs = path.join(dir, 'bootstrap');
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
       expect(files.dev().files).to.be.eql([
         path.join(dir, 'angular', 'angular.js'),
         path.join(dir, 'angular-animate', 'angular-animate.js'),
@@ -188,6 +188,36 @@ describe('BowerFiles', function () {
         path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.svg'),
         path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.ttf'),
         path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.woff'),
+        path.join(dir, 'angular-route', 'angular-route.js')
+      ]);
+    });
+
+    it('should get files by extension', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      expect(files.ext('js').files).to.be.eql([
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-route', 'angular-route.js')
+      ]);
+    });
+
+    it('should get files by globbing', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      expect(files.match('!**/glyphicons-halflings*').files).to.be.eql([
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(bs, 'less', 'bootstrap.less'),
+        path.join(bs, 'dist', 'css', 'bootstrap.css'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(dir, 'angular', 'angular.js'),
         path.join(dir, 'angular-route', 'angular-route.js')
       ]);
     });

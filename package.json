@@ -33,6 +33,7 @@
     "bower-config": "^0.5.2",
     "glob": "^4.3.2",
     "is-absolute": "^0.1.5",
+    "minimatch": "^2.0.1",
     "object-assign": "^2.0.0",
     "user-home": "^1.1.0"
   }
