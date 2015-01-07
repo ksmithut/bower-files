@@ -142,7 +142,12 @@ describe('BowerFiles', function () {
   // FILES TESTING
   describe('files', function () {
 
-    it('should not have duplicate files');
+    it('should not have duplicate files', function () {
+      cd('duplicate');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      expect(files.files).to.have.length(13);
+    });
 
   });
 
