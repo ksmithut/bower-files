@@ -23,7 +23,8 @@ describe('BowerFiles', function () {
         cwd: path.resolve(__dirname, 'fixtures', 'default'),
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'bower_components'),
-        overrides: {}
+        overrides: {},
+        componentJson: '.bower.json'
       });
     });
 
@@ -43,7 +44,8 @@ describe('BowerFiles', function () {
         cwd: path.resolve(__dirname, 'fixtures', 'bowerrc'),
         json: path.resolve(__dirname, 'fixtures', 'bowerrc', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'bowerrc', 'components'),
-        overrides: {}
+        overrides: {},
+        componentJson: '.bower.json'
       });
     });
 
@@ -55,20 +57,33 @@ describe('BowerFiles', function () {
         cwd: path.resolve(__dirname, 'fixtures', 'default'),
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'components'),
-        overrides: {}
+        overrides: {},
+        componentJson: '.bower.json'
       });
     });
 
-    it('should respect custom bower.json file');
-    it('should respect custom component configuration files (.bower.json)');
+    it('should respect custom bower.json file', function () {
+      cd('components');
+      var files = new BowerFiles({json: 'component.json'});
+      expect(files._component.dependencies).to.have.length(2);
+    });
+
+    it('should respect custom component configuration files', function () {
+      cd('components');
+      var files = new BowerFiles({
+        json: 'component.json',
+        componentJson: 'bower.json'
+      });
+      expect(files._component.dependencies[0].files).to.be.eql([
+        path.resolve(__dirname, 'fixtures', 'components', 'bower_components',
+          'bootstrap', 'dist', 'js', 'npm.js')
+      ]);
+    });
+
     it('should respect given overrides', function () {
       cd('default');
       var files = new BowerFiles({
-        overrides: {
-          jquery: {
-            main: 'dist/jquery.min.js'
-          }
-        }
+        overrides: {jquery: {main: 'dist/jquery.min.js'}}
       });
       expect(files._component.dependencies[0].dependencies[0].files).to.eql([
         path.resolve(__dirname, 'fixtures', 'default',
@@ -102,6 +117,7 @@ describe('BowerFiles', function () {
     });
 
     it('should handle symlinked components', function () {
+      /* jshint maxstatements: false */
       cd('symlink');
       var symlinkDir = path.join(__dirname, 'fixtures', 'symlink');
       var src  = path.join(symlinkDir, 'angular');
