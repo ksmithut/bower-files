@@ -229,6 +229,43 @@ describe('BowerFiles', function () {
         path.join(dir, 'angular', 'angular.js'),
         path.join(dir, 'angular-route', 'angular-route.js')
       ]);
+      expect(files.ext(true).files).to.be.eql({
+        js: [
+          path.join(dir, 'jquery', 'dist', 'jquery.js'),
+          path.join(bs, 'dist', 'js', 'bootstrap.js'),
+          path.join(dir, 'angular', 'angular.js'),
+          path.join(dir, 'angular-route', 'angular-route.js')
+        ],
+        less: [path.join(bs, 'less', 'bootstrap.less')],
+        css: [path.join(bs, 'dist', 'css', 'bootstrap.css')],
+        eot: [
+          path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.eot')
+        ],
+        svg: [
+          path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.svg')
+        ],
+        ttf: [
+          path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.ttf')
+        ],
+        woff: [
+          path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.woff')
+        ],
+      });
+    });
+
+    it('should join file extensions', function () {
+      cd('default');
+      var files   = new BowerFiles();
+      var cwd     = process.cwd();
+      var dir     = path.join(cwd, 'bower_components');
+      var bs      = path.join(dir, 'bootstrap');
+      var fontDef = {font: ['eot', 'svg', 'ttf', 'woff']};
+      expect(files.ext(true).join(fontDef).files.font).to.be.eql([
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.eot'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.svg'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.ttf'),
+        path.join(bs, 'dist', 'fonts', 'glyphicons-halflings-regular.woff')
+      ]);
     });
 
     it('should get files by globbing', function () {
