@@ -1,0 +1,31 @@
+{
+  "name": "override-dependencies",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ksmithut/bower-files",
+  "authors": [
+    "Keith Smith <ksmith.ut@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/fonts/glyphicons-halflings-regular.eot",
+        "dist/fonts/glyphicons-halflings-regular.svg",
+        "dist/fonts/glyphicons-halflings-regular.ttf",
+        "dist/fonts/glyphicons-halflings-regular.woff"
+      ],
+      "dependencies": {}
+    }
+  }
+}
