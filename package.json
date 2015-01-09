@@ -4,9 +4,11 @@
   "description": "Pulls in dynamic list of filepaths to bower components",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha",
-    "codeclimate": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | codeclimate && rm -rf ./coverage"
+    "jshint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js lib/**",
+    "check-cov": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test": "istanbul cover _mocha",
+    "posttest": " npm run check-cov; npm run jshint;",
+    "codeclimate": "cat ./coverage/lcov.info | codeclimate"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "codeclimate-test-reporter": "0.0.4",
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.5",
+    "jshint": "^2.5.11",
     "jshint-stylish": "^1.0.0",
     "mocha": "^2.0.1",
     "mocha-lcov-reporter": "^0.0.1"
