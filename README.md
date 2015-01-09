@@ -6,7 +6,7 @@
 [![Build Status](http://img.shields.io/travis/ksmithut/bower-files/master.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 
-Helps you dynamically include your bower components into your build process.
+Help you dynamically include your bower components into your build process.
 
 **The Problem**
 
@@ -23,27 +23,25 @@ the library files for you to include in whatever build process you use. It
 splits up the files by extension, and puts them in the order they need to be in,
 in order to work correctly in the browser.
 
-## 2.x (Ch-ch-ch-changes)
+## 3.x
 
-There are breaking changes in 2.x. Mostly, it will just throw errors as they
-happen. The more I used this, the more I found it was hard to debug because I
-didn't check if bower-files failed in my gulpfile and some build process would
-fail. Checking for errors also made the module more complex and harder to
-manage.
+There are breaking changes in 3.x. A few features were requested, but with the
+way that the code was organized, it was going to be pretty difficult and it
+would make the codebase even more complicated. In the end, I refactored most
+every piece to follow a more modular approach. I am much happier with the code
+base than I was, but it's not perfect. I'm going to be slowly refactoring litte
+pieces here and there, but the api should not change much from here.
 
-A `join` option is now available! Check in the options below to see how it
-works! I put it in there because I was often having to manually group font files
-to copy them into my build directory.
+For those of you who want the old 2.x api, just use it the same way, but adding
+a `.old` before the function call.
 
-The code was refactored a bit and I 'reworded' the tests. Still have 100% test
-coverage, but the tests could probably still be fleshed out a bit better. Feel
-free to contribute and modify the tests! But I'd still like to maintain 100%
-code coverage.
+```javascript
+var lib = require('bower-files').old(options);
+```
 
-I also removed `lodash` as a dependency. 1MB! Although it was the only
-dependency, I figured that I could find some smaller modules (or roll my own)
-that did the same things. Although this makes more modules to keep updated, it
-reduces total size by a lot (reduced by about 944kb).
+With that you get the benefit of using the new modular code, and it still passes
+all of the old tests (which had 100% api and code coverage).
+[2.x Docs](README-2.x.md)
 
 ## Installation
 
@@ -62,7 +60,7 @@ var uglify = require('gulp-uglify');
 var lib    = require('bower-files')();
 
 gulp.task('default', function () {
-  gulp.src(lib.js)
+  gulp.src(lib.ext('js').files)
     .pipe(concat('lib.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('public/js'));
@@ -82,14 +80,14 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.js': lib.js
+          'build/lib.min.js': lib.ext('js').files
         }
       }
     },
     cssmin: {
       dist: {
         files: {
-          'build/<%= pkg.name %>-lib.<%= pkg.version %>.min.css': lib.css
+          'build/lib.min.css': lib.ext('css').files
         }
       }
     }
@@ -105,66 +103,52 @@ module.exports = function (grunt) {
 
 *Other Solutions*
 
-There are other modules that do this same thing. Perhaps they may have
-suggestions for this module and end up using it:
+There are other modules that do this same thing, but in different ways:
 
+- [`main-bower-files`](https://github.com/ck86/main-bower-files)
 - [`gulp-bower-files`](https://www.npmjs.org/package/gulp-bower-files)
 
 ## Options
 
-You can pass options into the function call to customize what you get:
+The following gives you an instance of your bower files.
 
 ```javascript
-var bowerFiles = require('bower-files')
-var jsLib      = bowerFiles({ext: 'js'});
+var lib = require('bower-files')(/* options */);
 ```
 
-* `options.cwd` - Your current working directory to look for `bower.json` and
-`bower_components`. MUST be an absolute path. Default: `process.cwd()`
+Those options are as follows:
 
-* `options.json` - The path to your `bower.json` file. Could be
-`components.json` if you wanted! If you use a relative path, it will prepend the
-`options.cwd`. If you use an absolute path, it will ignore the `options.cwd`.
+#### `options.cwd` {String}
+
+Default: `process.cwd()`
+
+Your current working directory where your `bower.json` lives. This is also where
+it will start looking at `.bowerrc`. **MUST** be an absolute path.
+
+#### `options.json` {String}
+
 Default: `'bower.json'`
 
-* `options.dir` - The path to your `bower_components`. Same as options.json in
-relation to your `options.cwd`. Default: `'bower_components'`
+The relative path to your `bower.json`. This is relative to your `options.cwd`.
 
-* `options.componentJson` - The filename that shows up from `bower` in each
-component that contains sub-dependencies and it's 'main' declaration. Default:
-`.bower.json`
+#### `options.componentJson` {String}
 
-* `options.symlinkedJson` - The filename that shows up from `bower` for
-symlinked components. Default: `bower.json`
+Default: `'.bower.json'`
 
-* `options.ext` (Boolean/String) - Whether or not to split up the dependencies
-by extension. If a String is passed, it will only return the files with the
-given extension (don't include the '.'). Default: `true`
+When you run `bower install jquery` it installs the `jquery` component into a
+folder `bower_components/jquery/`. In that directory, there is a `.bower.json`
+file put there by bower, which essentially is a copy of the other `bower.json`,
+but it's what is officially used by bower. If for some reason you are using a
+different package manager that uses a different file, then you can change it
+with this option. Otherwise, leave it as is.
 
-* `options.dev` (Boolean) - Whether or not to include devDependencies. Default:
-`false`
+#### `options.overrides` {Object}
 
-* `options.self` (Boolean) - Whether or not to include the `main` definition in
-the given `bower.json` file.
+Default: `{}`
 
-* `options.join` (Object) - You can specify `join` specifications to join
-certain extensions into a single group.
-
-Example:
-
-```javascript
-var lib = require('bower-files')({
-  join: {fonts: ['eot', 'woff', 'svg', 'ttf']}
-});
-console.log(lib.fonts);
-// now lib.fonts includes all .eot, .woff, .svg, and .ttf files
-```
-
-Default: `false`
-
-* `options.overrides` (Object) - An overrides object to override specific
-package main files. Occasionally, you'll find a bower component that has no
-defined `main` property. So here, you pass in an object that looks like this:
+An overrides object to override specific package main files. Occasionally,
+you'll find a bower component that has no defined `main` property. So here, you
+pass in an object that looks like this:
 
 ```javascript
 var lib = require('bower-files')({
@@ -181,42 +165,143 @@ Note that you can also add this POJO into `bower.json` in `JSON` form, but if
 you specify an overrides directly when calling `bower-files`, it will override
 the `bower.json` version.
 
-## Troubleshooting
+#### `options.dir` {String}
 
-There are a few things that can go wrong.
+Default: `'bower_components'`
 
-Make sure you `bower install`. That will solve a lot of your issues.
+The directory that your bower_components directory is set. Note that this module
+will automatically read your `.bowerrc` file, so if you already have it being
+set there, you don't need to set this option. It also follows the same
+`.bowerrc` rules that [bower
+follows](http://bower.io/docs/config/#placement--order)
 
-Occasionally, you will come across a bower component that doesn't have a `main`
-property defined in it's `bower.json` (jQuery didn't used to have it). Because
-this is how we determine which files to include, it won't include the component,
-but it will return an error. You can, however, provide it with the correct file.
+## API
 
-In your own `bower.json`, provide an "overrides" property that looks something
-like this:
+Getting the files and filtering through them can be a pain without this module.
+This API is designed to be easy to understand. If you don't like it, PRs are
+welcome.
+
+First, you need your BowerFiles instance:
 
 ```javascript
-{
-  ...
-  "overrides": {
-    "jquery": {
-      "main": "./dist/jquery.js"
-    }
-  }
-}
+var lib = require('bower-files')();
 ```
 
-The main property can be a string representing the relative path within the
-component directory to the main file to be included, or it can be an array of
-relative paths, or even a relative glob.
+At this point, `bower-files` has gotten a list of all the components and their
+dependencies. Now it's up to you to use the API to filter those files.
+
+### Chainable Methods
+
+The following methods are chainable. At the end, you will need to get the
+`files` property to get the array of files.
+
+```javascript
+lib.files; // returns all of the files
+```
+
+#### `lib.self()`
+
+By default the array of files you get only contain your dependencies defined in
+the `dependencies` property in your `bower.json`. This allows you to also get
+the files defined in the `main` property in your `bower.json`.
+
+```javascript
+lib.self().files;
+```
+
+#### `lib.dev()`
+
+This throws in your `devDependencies`. Right now they come before the normal
+dependencies, but I may be convinced to change that if someone runs into issues.
+
+```javascript
+lib.dev().files;
+```
+
+#### `lib.ext('js')`
+
+Gives you the files with the given extension(s). Accepts a string, array of
+strings, or a boolean. The strings are extensions that you would like to filter
+by (without the '.'). If you pass `true`, it will return an object whose
+properties are all of the extensions.
+
+```javascript
+lib.ext('js').files; // Gets all .js files
+lib.ext(['css', 'less']).files; // Gets all .css and .less files
+lib.ext('css').ext('less').files; // Same as above
+lib.ext(true).files; // Get an object like:
+/*
+{
+  js: ['what.js', 'who.js'],
+  css: ['when.css'],
+  less: ['why.less']
+}
+*/
+```
+
+#### `lib.match('!**/*.min.js')`
+
+Allows you to glob match the files. Accepts a string, or array of strings. The
+files have to match all of the given glob strings to make it through.
+
+```javascript
+// Gets all .js files that aren't .min.js files
+lib.match('**/*.js').match('!**/*.min.js').files;
+```
+
+#### `lib.join({font: ['eot', 'woff', 'ttf', 'svg']})`
+
+Allows you to join files of a certain extension into another extension. Accepts
+an object as formed above and in the example below. It's only really useful if
+you plan on using `.ext(true)` to split by extension, otherwise you can just use
+`lib.ext(['eot', 'woff', 'ttf', 'svg']).files` to get the files you need.
+
+```javascript
+// Gets all the font files, from bootstrap for example
+lib.join({font: ['eot', 'woff', 'ttf', 'svg']}).files
+```
+
+### Non-Chainable
+
+There's really only one method, and it could be made chainable really easy, but
+this method is really a catch all of all of the above methods.
+
+#### `lib.filter({/* options */})`
+
+The object given have all of the above options given through the chainable
+methods. Below is a full example.
+
+```javascript
+lib.filter({
+  self: true,
+  dev: true,
+  ext: 'js',
+  match: ['!**/*.min.js'],
+  join: {
+    js: ['js', 'jsx']
+  }
+});
+// chainable alternative
+lib.self()
+  .dev()
+  .ext('js')
+  .match('!**/*.min.js')
+  .join({js: ['js', 'jsx']})
+  .files;
+```
+
+The above returns all of the `.js` files, including the ones in your
+`bower.json`, and the `devDependencies`, and they aren't `min.js` files, and it
+joins all of the 'js' and 'jsx' files into the 'js' extension. That join could
+be used in the extensions instead, but it's just there to show you how you
+would do it.
 
 ## Development
 
-You can also run `npm test`, and it does basically does the same thing as
-`gulp test`, but an error will be thrown because it does some more istanbul
-stuff to send data to the coverage server. When this project runs through
-travis, it also sends coverage data to coveralls.io.
+PRs welcome! Make sure you have an updated `npm` or the npm scripts won't work.
+Tests that run fail if not all the tests pass, if you don't have 100% coverage,
+or if the code doesn't pass jshint. I'd like to keep everything the same style,
+so feel free to call me out on stuff. If you don't like the coding style, I'm
+open for a discussion on it.
 
-When forking and doing pull requests, work off of the `develop` branch. I won't
-be super strict on this, but it's what I would prefer. That way we can keep
-`master` clean.
+To run tests, run `npm test`.
