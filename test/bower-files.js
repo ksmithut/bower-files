@@ -304,6 +304,12 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should get no files when extension matches nothing', function () {
+      cd('default');
+      var files = new BowerFiles();
+      expect(files.ext('unknown-extension').files).to.be.eql([]);
+    });
+
   });
 
 });
