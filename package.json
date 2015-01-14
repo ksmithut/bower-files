@@ -26,7 +26,6 @@
   "devDependencies": {
     "codeclimate-test-reporter": "0.0.4",
     "expect.js": "^0.3.1",
-    "glob": "^4.3.2",
     "istanbul": "^0.3.5",
     "jshint": "^2.5.11",
     "jshint-stylish": "^1.0.0",
