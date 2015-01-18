@@ -1,18 +1,32 @@
 'use strict';
+/* jshint maxlen: false */
+/* jshint maxstatements: false */
 
 var fs     = require('fs');
 var path   = require('path');
 var expect = require('expect.js');
 var cwd    = process.cwd();
 
+var accessSync;
+
 // Tests
 // -----
 describe('bower-files tests', function () {
 
+  var accessSync;
+
+  before(function () {
+    accessSync = fs.accessSync;
+    delete fs.accessSync;
+  });
+
   // After each, reset the `process.cwd()`
   afterEach(function () {
     cd('../');
-    deleteCache('index.js');
+  });
+
+  after(function () {
+    fs.accessSync = accessSync;
   });
 
   describe('Level 1', function () {
@@ -132,15 +146,14 @@ describe('bower-files tests', function () {
 
     it('handles missing dependencies', function () {
       cd('missing-dependencies');
-      var error;
-      try { var files = getModule(); }
+      var error, files;
+      try { files = getModule(); }
       catch (e) { error = e; }
       expect(error).to.be.an(Error);
       error = null;
 
-      deleteCache('index.js');
       cd('missing-child-dependencies');
-      try { var files = getModule(); }
+      try { files = getModule(); }
       catch (e) { error = e; }
       expect(error).to.be.an(Error);
       error = null;
@@ -166,6 +179,5 @@ function getModule(options) {
   return require('../').old(options);
 }
 function deleteCache(filepath) {
-  return;
   delete require.cache[require.resolve('../lib/' + filepath)];
 }
