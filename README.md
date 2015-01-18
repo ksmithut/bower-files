@@ -1,5 +1,8 @@
 # bower-files
 
+[![io.js compatibility](https://img.shields.io/badge/io.js-compatible-brightgreen.svg?style=flat)](https://iojs.org/)
+[![node.js compatibility](https://img.shields.io/badge/node.js-compatible-brightgreen.svg?style=flat)](https://nodejs.org/)
+
 [![NPM version](http://img.shields.io/npm/v/bower-files.svg?style=flat)](https://www.npmjs.org/package/bower-files)
 [![Dependency Status](http://img.shields.io/gemnasium/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
 [![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
