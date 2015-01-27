@@ -323,7 +323,7 @@ describe('BowerFiles', function () {
       var dist  = path.join(strap, 'dist');
       expect(files.deps).to.be.eql({
         jquery: [
-          path.join(dir, 'dist', 'jquery.js')
+          path.join(dir, 'jquery', 'dist', 'jquery.js')
         ],
         bootstrap: [
           path.join(strap, 'less', 'bootstrap.less'),
@@ -340,6 +340,71 @@ describe('BowerFiles', function () {
         angularRoute: [
           path.join(dir, 'angular-route', 'angular-route.js')
         ]
+      });
+    });
+
+    it('should get dependency hash with self', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var self  = path.join(__dirname, 'fixtures', 'default');
+      var dir   = path.join(self, 'bower_components');
+      var strap = path.join(dir, 'bootstrap');
+      var dist  = path.join(strap, 'dist');
+      expect(files.self().deps).to.be.eql({
+        self: [
+          path.join(self, 'dist', 'helpers.js'),
+          path.join(self, 'dist', 'main.js')
+        ],
+        jquery: [
+          path.join(dir, 'jquery', 'dist', 'jquery.js')
+        ],
+        bootstrap: [
+          path.join(strap, 'less', 'bootstrap.less'),
+          path.join(dist, 'css', 'bootstrap.css'),
+          path.join(dist, 'js', 'bootstrap.js'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.eot'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.svg'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.ttf'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.woff')
+        ],
+        angular: [
+          path.join(dir, 'angular', 'angular.js')
+        ],
+        angularRoute: [
+          path.join(dir, 'angular-route', 'angular-route.js')
+        ]
+      });
+    });
+
+    it('should get dependency hash with dev', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var self  = path.join(__dirname, 'fixtures', 'default');
+      var dir   = path.join(self, 'bower_components');
+      var strap = path.join(dir, 'bootstrap');
+      var dist  = path.join(strap, 'dist');
+      expect(files.dev().ext(true).deps).to.be.eql({
+        jquery: {
+          js: [path.join(dir, 'jquery', 'dist', 'jquery.js')]
+        },
+        bootstrap: {
+          less : [path.join(strap, 'less', 'bootstrap.less')],
+          css  : [path.join(dist, 'css', 'bootstrap.css')],
+          js   : [path.join(dist, 'js', 'bootstrap.js')],
+          eot  : [path.join(dist, 'fonts', 'glyphicons-halflings-regular.eot')],
+          svg  : [path.join(dist, 'fonts', 'glyphicons-halflings-regular.svg')],
+          ttf  : [path.join(dist, 'fonts', 'glyphicons-halflings-regular.ttf')],
+          woff : [path.join(dist, 'fonts', 'glyphicons-halflings-regular.woff')]
+        },
+        angular: {
+          js: [path.join(dir, 'angular', 'angular.js')]
+        },
+        angularRoute: {
+          js: [path.join(dir, 'angular-route', 'angular-route.js')]
+        },
+        angularAnimate: {
+          js: [path.join(dir, 'angular-animate', 'angular-animate.js')]
+        }
       });
     });
 
