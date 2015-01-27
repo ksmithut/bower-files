@@ -202,6 +202,19 @@ The following methods are chainable. At the end, you will need to get the
 lib.files; // returns all of the files
 ```
 
+You may also get the `deps` property, which will be an object hash with all of
+the bower components as keys.
+
+```javascript
+lib.deps;
+/*
+{
+  jquery: [...],
+  bootstrap: [...]
+}
+*/
+```
+
 #### `lib.self()`
 
 By default the array of files you get only contain your dependencies defined in
@@ -210,6 +223,7 @@ the files defined in the `main` property in your `bower.json`.
 
 ```javascript
 lib.self().files;
+lib.self().deps;
 ```
 
 #### `lib.dev()`
@@ -219,6 +233,7 @@ dependencies, but I may be convinced to change that if someone runs into issues.
 
 ```javascript
 lib.dev().files;
+lib.dev().deps;
 ```
 
 #### `lib.ext('js')`
@@ -238,6 +253,25 @@ lib.ext(true).files; // Get an object like:
   js: ['what.js', 'who.js'],
   css: ['when.css'],
   less: ['why.less']
+}
+*/
+lib.ext('js').deps;
+/*
+{
+  jquery: ['/path/to/jquery.js'],
+  bootstrap: ['/path/to/bootstrap.js']
+}
+*/
+lib.ext(true).deps;
+/*
+{
+  jquery: { js: ['/path/to/jquery.js'] },
+  bootstrap: {
+    js: ['/path/to/bootstrap.js'],
+    css: ['/path/to/bootstrap.css'],
+    less: ['/path/to/boostrap.less'],
+    you get the picture...
+  }
 }
 */
 ```
@@ -298,6 +332,13 @@ The above returns all of the `.js` files, including the ones in your
 joins all of the 'js' and 'jsx' files into the 'js' extension. That join could
 be used in the extensions instead, but it's just there to show you how you
 would do it.
+
+## Questions
+
+I know it's trying to solve for a lot of different use cases, so if you have any
+questions about how to implement this in your specific setup, feel free to open
+an issue. I usually get back to you pretty quickly, but usually no later than
+24 hours, as long as I have access to email.
 
 ## Development
 
