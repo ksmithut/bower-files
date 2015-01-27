@@ -312,4 +312,37 @@ describe('BowerFiles', function () {
 
   });
 
+  // dependency hash testing
+  describe('dependencies', function () {
+
+    it('should get dependency hash', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var dir = path.join(__dirname, 'fixtures', 'default', 'bower_components');
+      var strap = path.join(dir, 'bootstrap');
+      var dist  = path.join(strap, 'dist');
+      expect(files.deps).to.be.eql({
+        jquery: [
+          path.join(dir, 'dist', 'jquery.js')
+        ],
+        bootstrap: [
+          path.join(strap, 'less', 'bootstrap.less'),
+          path.join(dist, 'css', 'bootstrap.css'),
+          path.join(dist, 'js', 'bootstrap.js'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.eot'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.svg'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.ttf'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.woff')
+        ],
+        angular: [
+          path.join(dir, 'angular', 'angular.js')
+        ],
+        angularRoute: [
+          path.join(dir, 'angular-route', 'angular-route.js')
+        ]
+      });
+    });
+
+  });
+
 });
