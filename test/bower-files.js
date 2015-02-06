@@ -24,7 +24,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'bower_components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
@@ -45,7 +46,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'bowerrc', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'bowerrc', 'components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
@@ -58,7 +60,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
@@ -284,10 +287,6 @@ describe('BowerFiles', function () {
       ]);
     });
 
-    it('should get specific packages');
-
-    it('should exclude specific packages');
-
     it('should use all the options in a filter command', function () {
       cd('default');
       var files = new BowerFiles();
@@ -338,6 +337,34 @@ describe('BowerFiles', function () {
           path.join(dir, 'angular', 'angular.js')
         ],
         angularRoute: [
+          path.join(dir, 'angular-route', 'angular-route.js')
+        ]
+      });
+    });
+
+    it('should get dependency hash with not camelCased deps', function () {
+      cd('default');
+      var files = new BowerFiles({camelCase: false});
+      var dir = path.join(__dirname, 'fixtures', 'default', 'bower_components');
+      var strap = path.join(dir, 'bootstrap');
+      var dist  = path.join(strap, 'dist');
+      expect(files.deps).to.be.eql({
+        jquery: [
+          path.join(dir, 'jquery', 'dist', 'jquery.js')
+        ],
+        bootstrap: [
+          path.join(strap, 'less', 'bootstrap.less'),
+          path.join(dist, 'css', 'bootstrap.css'),
+          path.join(dist, 'js', 'bootstrap.js'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.eot'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.svg'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.ttf'),
+          path.join(dist, 'fonts', 'glyphicons-halflings-regular.woff')
+        ],
+        angular: [
+          path.join(dir, 'angular', 'angular.js')
+        ],
+        'angular-route': [
           path.join(dir, 'angular-route', 'angular-route.js')
         ]
       });
