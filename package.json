@@ -38,7 +38,9 @@
     "camelcase": "^1.0.2",
     "globby": "^1.1.0",
     "is-absolute": "^0.1.5",
+    "jshint": "^2.6.0",
     "minimatch": "^2.0.1",
+    "mocha": "^2.1.0",
     "object-assign": "^2.0.0",
     "read-json-sync": "^1.0.0",
     "user-home": "^1.1.1"

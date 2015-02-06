@@ -4,7 +4,8 @@
 [![node.js compatibility](https://img.shields.io/badge/node.js-compatible-brightgreen.svg?style=flat)](https://nodejs.org/)
 
 [![NPM version](http://img.shields.io/npm/v/bower-files.svg?style=flat)](https://www.npmjs.org/package/bower-files)
-[![Dependency Status](http://img.shields.io/gemnasium/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
+[![Dependency Status](http://img.shields.io/david/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
+[![Dev Dependency Status](http://img.shields.io/david/dev/ksmithut/bower-files.svg?style=flat)](https://gemnasium.com/ksmithut/bower-files)
 [![Code Climate](http://img.shields.io/codeclimate/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 [![Build Status](http://img.shields.io/travis/ksmithut/bower-files/master.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
