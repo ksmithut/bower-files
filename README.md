@@ -178,6 +178,21 @@ set there, you don't need to set this option. It also follows the same
 `.bowerrc` rules that [bower
 follows](http://bower.io/docs/config/#placement--order)
 
+#### `options.camelCase` {Boolean}
+
+Default: `true`
+
+When you get a dependency hash using the `.deps`, by default, it will return
+the components in camelCase. So if you have `angular-route` as a dependency,
+it will be returned in the dependency hash as `angularRoute`. To prevent this
+from happening, pass false to this option. Example:
+
+```javascript
+var lib = require('bower-files')({camelCase: false}).deps;
+
+lib['angular-route']; // instead of lib.angularRoute
+```
+
 ## API
 
 Getting the files and filtering through them can be a pain without this module.
