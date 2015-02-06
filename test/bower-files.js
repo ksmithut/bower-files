@@ -24,7 +24,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'bower_components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
@@ -45,7 +46,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'bowerrc', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'bowerrc', 'components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
@@ -58,7 +60,8 @@ describe('BowerFiles', function () {
         json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
         dir: path.resolve(__dirname, 'fixtures', 'default', 'components'),
         overrides: {},
-        componentJson: '.bower.json'
+        componentJson: '.bower.json',
+        camelCase: true
       });
     });
 
