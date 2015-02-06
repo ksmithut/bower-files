@@ -41,6 +41,6 @@
     "minimatch": "^2.0.1",
     "object-assign": "^2.0.0",
     "read-json-sync": "^1.0.0",
-    "user-home": "^1.1.0"
+    "user-home": "^1.1.1"
   }
 }
