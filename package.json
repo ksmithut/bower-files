@@ -34,13 +34,15 @@
   },
   "dependencies": {
     "array-uniq": "^1.0.2",
+    "arrify": "^1.0.0",
     "bower-config": "^0.5.2",
     "camelcase": "^1.0.2",
     "globby": "^1.1.0",
     "is-absolute": "^0.1.5",
+    "is-symlink-sync": "1.0.0",
     "minimatch": "^2.0.1",
     "object-assign": "^2.0.0",
     "read-json-sync": "^1.0.0",
-    "user-home": "^1.1.1"
+    "untildify": "^2.0.0"
   }
 }
