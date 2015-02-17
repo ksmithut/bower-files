@@ -2,7 +2,10 @@
   "name": "bower-files",
   "version": "3.4.3",
   "description": "Pulls in dynamic list of filepaths to bower components",
-  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "scripts": {
     "jshint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js lib/**",
     "check-cov": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
