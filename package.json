@@ -3,9 +3,13 @@
   "version": "3.4.5",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "files": [
+    "bin",
     "index.js",
     "lib"
   ],
+  "bin": {
+    "bower-files": "bin/bower-files"
+  },
   "scripts": {
     "jshint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js lib/**",
     "check-cov": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
@@ -46,6 +50,7 @@
     "minimatch": "^2.0.4",
     "object-assign": "^2.0.0",
     "read-json-sync": "^1.1.0",
-    "untildify": "^2.0.0"
+    "untildify": "^2.0.0",
+    "yargs": "^3.7.2"
   }
 }
