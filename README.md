@@ -105,6 +105,12 @@ module.exports = function (grunt) {
 };
 ```
 
+or via the CLI
+
+```sh
+$ bower-ls js css
+```
+
 *Other Solutions*
 
 There are other modules that do this same thing, but in different ways:
