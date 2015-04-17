@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 'use strict';
-var bowerFiles = require('../lib/bower-files')();
+var lib = require('../lib/bower-files')();
 var types = require('yargs')
 .usage('Usage: $0 [file extensions...]')
 .example('$0 css', 'List all bower dependency CSS main files.')
@@ -9,7 +9,7 @@ var types = require('yargs')
 .strict()
 .argv._;
 
-if (types.length) bowerFiles = bowerFiles.ext(types);
-bowerFiles.files.forEach(function (filepath) {
+if (types.length) lib = lib.ext(types);
+lib.files.forEach(function (filepath) {
   console.log(filepath);
 });
