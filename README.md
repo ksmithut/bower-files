@@ -248,6 +248,16 @@ lib.self().files;
 lib.self().deps;
 ```
 
+#### `lib.relative('/')`
+
+Default: process.cwd()
+
+Converts the file paths to be relative to the provided path, defaults to process.cwd()
+
+```javascript
+lib.relative(__dirname).files;
+```
+
 #### `lib.dev()`
 
 This throws in your `devDependencies`. Right now they come before the normal
