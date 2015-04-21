@@ -256,6 +256,25 @@ describe('BowerFiles', function () {
       });
     });
 
+    it('should get relative files', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var dir   = 'bower_components';
+      var bs    = 'bootstrap';
+      expect(files.relative().ext('js').files).to.be.eql([
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(dir, bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-route', 'angular-route.js')
+      ]);
+      expect(files.relative(path.join(process.cwd(), '..')).ext('js').files).to.be.eql([
+        path.join('default', dir, 'jquery', 'dist', 'jquery.js'),
+        path.join('default', dir, bs, 'dist', 'js', 'bootstrap.js'),
+        path.join('default', dir, 'angular', 'angular.js'),
+        path.join('default', dir, 'angular-route', 'angular-route.js')
+      ]);
+    });
+
     it('should join file extensions', function () {
       cd('default');
       var files   = new BowerFiles();
