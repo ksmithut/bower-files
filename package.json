@@ -1,6 +1,6 @@
 {
   "name": "bower-files",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "files": [
     "bin",
