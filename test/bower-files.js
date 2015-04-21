@@ -287,6 +287,29 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should allow caching filters', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      var self  = files.self();
+      var js    = self.ext('js');
+      var css   = self.ext('css');
+      expect(js.files).to.be.eql([
+        path.join(dir, 'jquery', 'dist', 'jquery.js'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-route', 'angular-route.js'),
+        path.join(cwd, 'dist', 'helpers.js'),
+        path.join(cwd, 'dist', 'main.js')
+      ]);
+      expect(css.files).to.be.eql([
+        path.join(bs, 'dist', 'css', 'bootstrap.css')
+      ]);
+    });
+
+
     it('should use all the options in a filter command', function () {
       cd('default');
       var files = new BowerFiles();
