@@ -306,6 +306,21 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should support multiple match()', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      expect(files.match('!**/glyphicons-halflings*').match('!**/jquery/**').files).to.be.eql([
+        path.join(bs, 'less', 'bootstrap.less'),
+        path.join(bs, 'dist', 'css', 'bootstrap.css'),
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+        path.join(dir, 'angular', 'angular.js'),
+        path.join(dir, 'angular-route', 'angular-route.js')
+      ]);
+    });
+
     it('should allow caching filters', function () {
       cd('default');
       var files = new BowerFiles();
