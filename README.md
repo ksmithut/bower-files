@@ -258,6 +258,17 @@ Converts the file paths to be relative to the provided path, defaults to process
 lib.relative(__dirname).files;
 ```
 
+#### `lib.main(false)`
+
+Default: true
+
+This gives you the ability to remove main dependencies from the file list.
+
+```javascript
+lib.dev().main(false).files;
+lib.dev().main(false).deps;
+```
+
 #### `lib.dev()`
 
 This throws in your `devDependencies`. Right now they come before the normal
