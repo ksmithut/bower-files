@@ -2,7 +2,7 @@
 
 var path       = require('path');
 var fs         = require('fs');
-var expect     = require('expect.js');
+var expect     = require('chai').expect;
 var cd         = require('./helpers/cd');
 var BowerFiles = require('..');
 
@@ -34,8 +34,8 @@ describe('BowerFiles', function () {
       var files, error;
       try { files = new BowerFiles({ cwd: 'default' }); }
       catch(err) { error = err; }
-      expect(files).to.be(undefined);
-      expect(error).to.be.an(Error);
+      expect(files).to.be.equal(undefined);
+      expect(error).to.be.instanceOf(Error);
     });
 
     it('should respect .bowerrc', function () {
@@ -113,8 +113,8 @@ describe('BowerFiles', function () {
       var files = new BowerFiles();
       expect(files._component.dependencies).to.have.length(2);
       expect(files._component.devDependencies).to.have.length(1);
-      expect(files._component.dependencies[0].name).to.be('bootstrap');
-      expect(files._component.dependencies[0].dir).to.be(
+      expect(files._component.dependencies[0].name).to.be.equal('bootstrap');
+      expect(files._component.dependencies[0].dir).to.be.equal(
         path.resolve(__dirname, 'fixtures', 'default', 'bower_components')
       );
     });
@@ -130,8 +130,8 @@ describe('BowerFiles', function () {
         fs.symlinkSync(src, dest);
         var files = new BowerFiles();
         var ngRoute = files._component.dependencies[1];
-        expect(ngRoute.dependencies[0]).to.be.ok();
-        expect(ngRoute.dependencies[0].path).to.be(dest);
+        expect(ngRoute.dependencies[0]).to.be.ok;
+        expect(ngRoute.dependencies[0].path).to.be.equal(dest);
       } catch (err) {
         error = err;
       } finally {
@@ -144,6 +144,7 @@ describe('BowerFiles', function () {
 
   // FILES TESTING
   describe('files', function () {
+    /* jshint maxstatements: false */
 
     it('should not have duplicate files', function () {
       cd('duplicate');
@@ -300,7 +301,12 @@ describe('BowerFiles', function () {
         path.join(dir, 'angular', 'angular.js'),
         path.join(dir, 'angular-route', 'angular-route.js')
       ]);
-      expect(files.relative(path.join(process.cwd(), '..')).ext('js').files).to.be.eql([
+      expect(
+        files
+          .relative(path.join(process.cwd(), '..'))
+          .ext('js')
+          .files
+      ).to.be.eql([
         path.join('default', dir, 'jquery', 'dist', 'jquery.js'),
         path.join('default', dir, bs, 'dist', 'js', 'bootstrap.js'),
         path.join('default', dir, 'angular', 'angular.js'),
@@ -345,7 +351,12 @@ describe('BowerFiles', function () {
       var cwd   = process.cwd();
       var dir   = path.join(cwd, 'bower_components');
       var bs    = path.join(dir, 'bootstrap');
-      expect(files.match('!**/glyphicons-halflings*').match('!**/jquery/**').files).to.be.eql([
+      expect(
+        files
+          .match('!**/glyphicons-halflings*')
+          .match('!**/jquery/**')
+          .files
+      ).to.be.eql([
         path.join(bs, 'less', 'bootstrap.less'),
         path.join(bs, 'dist', 'css', 'bootstrap.css'),
         path.join(bs, 'dist', 'js', 'bootstrap.js'),

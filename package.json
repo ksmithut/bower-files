@@ -1,6 +1,7 @@
 {
   "name": "bower-files",
   "version": "3.7.0",
+  "main": "./lib/bower-files",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "files": [
     "bin",
@@ -11,7 +12,7 @@
     "bower-files": "bin/bower-files"
   },
   "scripts": {
-    "jshint": "jshint --reporter node_modules/jshint-stylish/stylish.js index.js lib/**",
+    "jshint": "jshint --reporter node_modules/jshint-stylish lib/**",
     "check-cov": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
     "test": "istanbul cover _mocha",
     "posttest": " npm run check-cov; npm run jshint;",
@@ -31,26 +32,26 @@
     "url": "https://github.com/ksmithut/bower-files/issues"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "0.0.4",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.3.13",
-    "jshint": "^2.6.3",
-    "jshint-stylish": "^1.0.1",
-    "mocha": "^2.2.1",
+    "chai": "^3.0.0",
+    "codeclimate-test-reporter": "^0.1.0",
+    "istanbul": "^0.3.17",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.0.1",
+    "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2"
   },
   "dependencies": {
     "array-uniq": "^1.0.2",
     "arrify": "^1.0.0",
     "bower-config": "^0.6.1",
-    "camelcase": "^1.0.2",
+    "camelcase": "^1.1.0",
     "globby": "^1.2.0",
     "is-absolute": "^0.1.7",
-    "is-symlink-sync": "^1.0.0",
-    "minimatch": "^2.0.4",
-    "object-assign": "^2.0.0",
+    "is-symlink-sync": "^1.0.1",
+    "minimatch": "^2.0.8",
+    "object-assign": "^2.1.1",
     "read-json-sync": "^1.1.0",
-    "untildify": "^2.0.0",
-    "yargs": "^3.7.2"
+    "untildify": "^2.1.0",
+    "yargs": "^3.15.0"
   }
 }

@@ -4,7 +4,7 @@
 
 var fs     = require('fs');
 var path   = require('path');
-var expect = require('expect.js');
+var expect = require('chai').expect;
 var cwd    = process.cwd();
 
 var accessSync;
@@ -35,8 +35,8 @@ describe('bower-files tests', function () {
       cd('override');
       var files        = getModule();
       var pathToJquery = './old-fixtures/override/bower_components/jquery/dist/jquery.min.js';
-      expect(files).to.be.an(Object);
-      expect(files.js).to.be.an(Array);
+      expect(files).to.be.instanceOf(Object);
+      expect(files.js).to.be.instanceOf(Array);
       pathToJquery = require.resolve(pathToJquery);
       expect(files.js).to.contain(pathToJquery);
     });
@@ -44,34 +44,34 @@ describe('bower-files tests', function () {
     it('should use the override for dependencies', function () {
       cd('override-dependencies');
       var files = getModule();
-      expect(files).to.be.an(Object);
-      expect(files.js).to.be(undefined);
+      expect(files).to.be.instanceOf(Object);
+      expect(files.js).to.be.equal(undefined);
     });
 
     it('should use the main file when self option is set', function () {
       cd('self-main');
       var files = getModule({self: true});
-      expect(files).to.be.an(Object);
-      expect(files.js).to.be.an(Array);
+      expect(files).to.be.instanceOf(Object);
+      expect(files.js).to.be.instanceOf(Array);
       expect(files.js[0]).to.contain('jquery');
       expect(files.js[1]).to.contain('bootstrap');
-      expect(files.js[2]).to.be(path.join(__dirname, 'old-fixtures/self-main/lib/fastclick.js'));
+      expect(files.js[2]).to.be.equal(path.join(__dirname, 'old-fixtures/self-main/lib/fastclick.js'));
     });
 
     it('should join extensions into a single property', function () {
       cd('join');
       var files = getModule({join: {fonts: ['eot', 'svg', 'ttf', 'woff', 'otf']}});
-      expect(files).to.be.an(Object);
-      expect(files.fonts).to.be.an(Array);
-      expect(files.fonts.length).to.be(4);
+      expect(files).to.be.instanceOf(Object);
+      expect(files.fonts).to.be.instanceOf(Array);
+      expect(files.fonts.length).to.be.equal(4);
     });
 
     it('should handle glob files', function () {
       cd('globs');
       var files = getModule();
-      expect(files).to.be.an(Object);
+      expect(files).to.be.instanceOf(Object);
       ['eot', 'svg', 'ttf', 'woff'].map(function (fontExt) {
-        expect(files[fontExt]).to.be.an(Array);
+        expect(files[fontExt]).to.be.instanceOf(Array);
         expect(files[fontExt][0]).to.eql(path.resolve('./bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.' + fontExt));
       });
     });
@@ -82,15 +82,15 @@ describe('bower-files tests', function () {
         json: path.join(__dirname, 'old-fixtures/just-array/bower.json'),
         ext: false
       });
-      expect(files).to.be.an(Array);
-      expect(files.length).to.be(3);
+      expect(files).to.be.instanceOf(Array);
+      expect(files.length).to.be.equal(3);
     });
 
     it('should get only the files with a certain extension', function () {
       cd('just-one-ext');
       var files = getModule({ext: 'css'});
-      expect(files).to.be.an(Array);
-      expect(files.length).to.be(1);
+      expect(files).to.be.instanceOf(Array);
+      expect(files.length).to.be.equal(1);
       expect(files[0]).be.equal(path.join(
         __dirname,
         'old-fixtures/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
@@ -103,15 +103,15 @@ describe('bower-files tests', function () {
         dev: true,
         ext: 'js'
       });
-      expect(files).to.be.an(Array);
-      expect(files.length).to.be(4);
+      expect(files).to.be.instanceOf(Array);
+      expect(files.length).to.be.equal(4);
     });
 
     it('should not get devDependencies when option is not given', function () {
       cd('dev-dependencies');
       var files = getModule({ext: 'js'});
-      expect(files).to.be.an(Array);
-      expect(files.length).to.be(3);
+      expect(files).to.be.instanceOf(Array);
+      expect(files.length).to.be.equal(3);
     });
 
     it('should follow symbolic links', function () {
@@ -122,9 +122,9 @@ describe('bower-files tests', function () {
         fs.symlinkSync(source, dest);
         cd('symlinks');
         var files = getModule({ext: 'js'});
-        expect(files).to.be.an(Array);
-        expect(files.length).to.be(1);
-        expect(files[0]).to.be(expectedJS);
+        expect(files).to.be.instanceOf(Array);
+        expect(files.length).to.be.equal(1);
+        expect(files[0]).to.be.equal(expectedJS);
       } catch(err) {
         throw err;
       } finally {
@@ -141,7 +141,7 @@ describe('bower-files tests', function () {
       var error;
       try { var files = getModule(); }
       catch (e) { error = e; }
-      expect(error).to.be.an(Error);
+      expect(error).to.be.instanceOf(Error);
     });
 
     it('handles missing dependencies', function () {
@@ -149,13 +149,13 @@ describe('bower-files tests', function () {
       var error, files;
       try { files = getModule(); }
       catch (e) { error = e; }
-      expect(error).to.be.an(Error);
+      expect(error).to.be.instanceOf(Error);
       error = null;
 
       cd('missing-child-dependencies');
       try { files = getModule(); }
       catch (e) { error = e; }
-      expect(error).to.be.an(Error);
+      expect(error).to.be.instanceOf(Error);
       error = null;
     });
 
@@ -164,7 +164,7 @@ describe('bower-files tests', function () {
       var error;
       try { var files = getModule(); }
       catch (e) { error = e; }
-      expect(error).to.be.an(Error);
+      expect(error).to.be.instanceOf(Error);
     });
   });
 
