@@ -16,7 +16,7 @@
     "check-cov": "istanbul check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
     "test": "istanbul cover _mocha",
     "posttest": " npm run check-cov; npm run jshint;",
-    "codeclimate": "cat ./coverage/lcov.info | codeclimate"
+    "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter"
   },
   "repository": {
     "type": "git",
