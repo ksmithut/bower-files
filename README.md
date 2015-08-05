@@ -312,7 +312,7 @@ lib.ext(true).deps;
   bootstrap: {
     js: ['/path/to/bootstrap.js'],
     css: ['/path/to/bootstrap.css'],
-    less: ['/path/to/boostrap.less'],
+    less: ['/path/to/bootstrap.less'],
     you get the picture...
   }
 }
@@ -323,6 +323,9 @@ lib.ext(true).deps;
 
 Allows you to glob match the files. Accepts a string, or array of strings. The
 files have to match all of the given glob strings to make it through.
+
+The matches are done relative to process.cwd(). So if you wanted to get all of
+the bootstrap files by matching, you would use `'*/bootstrap/**'` as a pattern.
 
 ```javascript
 // Gets all .js files that aren't .min.js files

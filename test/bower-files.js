@@ -345,6 +345,19 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should get files by globbing in cwd', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      console.log(process.cwd());
+      console.log(path.join(bs, 'dist', 'js', 'bootstrap.js'));
+      expect(files.match('*/bootstrap/**/*.js').files).to.be.eql([
+        path.join(bs, 'dist', 'js', 'bootstrap.js'),
+      ]);
+    });
+
     it('should support multiple match()', function () {
       cd('default');
       var files = new BowerFiles();
