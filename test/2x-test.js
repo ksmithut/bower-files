@@ -7,9 +7,7 @@ var path   = require('path');
 var expect = require('chai').expect;
 var cwd    = process.cwd();
 
-var accessSync;
-
-var FIXTURES = 'old-fixtures';
+var FIXTURES = '2x-fixtures';
 
 // Tests
 // -----

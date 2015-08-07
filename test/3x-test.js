@@ -3,10 +3,9 @@
 var path       = require('path');
 var fs         = require('fs');
 var expect     = require('chai').expect;
-var cd         = require('./helpers/cd');
+var FIXTURES = path.join(__dirname, '3x-fixtures');
+var cd         = require('./helpers/cd')(FIXTURES);
 var BowerFiles = require('../index');
-
-var FIXTURES = path.join(__dirname, 'fixtures');
 
 describe('BowerFiles', function () {
 
