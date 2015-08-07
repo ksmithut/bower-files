@@ -9,6 +9,8 @@ var cwd    = process.cwd();
 
 var accessSync;
 
+var FIXTURES = 'old-fixtures';
+
 // Tests
 // -----
 describe('bower-files tests', function () {
@@ -34,7 +36,7 @@ describe('bower-files tests', function () {
     it('should use the override', function () {
       cd('override');
       var files        = getModule();
-      var pathToJquery = './old-fixtures/override/bower_components/jquery/dist/jquery.min.js';
+      var pathToJquery = './' + FIXTURES + '/override/bower_components/jquery/dist/jquery.min.js';
       expect(files).to.be.instanceOf(Object);
       expect(files.js).to.be.instanceOf(Array);
       pathToJquery = require.resolve(pathToJquery);
@@ -55,7 +57,7 @@ describe('bower-files tests', function () {
       expect(files.js).to.be.instanceOf(Array);
       expect(files.js[0]).to.contain('jquery');
       expect(files.js[1]).to.contain('bootstrap');
-      expect(files.js[2]).to.be.equal(path.join(__dirname, 'old-fixtures/self-main/lib/fastclick.js'));
+      expect(files.js[2]).to.be.equal(path.join(__dirname, FIXTURES, 'self-main/lib/fastclick.js'));
     });
 
     it('should join extensions into a single property', function () {
@@ -79,7 +81,7 @@ describe('bower-files tests', function () {
     it('should get list of files without being split by extension', function () {
       cd('just-array');
       var files = getModule({
-        json: path.join(__dirname, 'old-fixtures/just-array/bower.json'),
+        json: path.join(__dirname, FIXTURES, 'just-array/bower.json'),
         ext: false
       });
       expect(files).to.be.instanceOf(Array);
@@ -93,7 +95,8 @@ describe('bower-files tests', function () {
       expect(files.length).to.be.equal(1);
       expect(files[0]).be.equal(path.join(
         __dirname,
-        'old-fixtures/just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
+        FIXTURES,
+        'just-one-ext/bower_components/bootstrap/dist/css/bootstrap.css'
       ));
     });
 
@@ -115,9 +118,9 @@ describe('bower-files tests', function () {
     });
 
     it('should follow symbolic links', function () {
-      var source     = path.join(__dirname, 'old-fixtures/symlinks/angular');
-      var dest       = path.join(__dirname, 'old-fixtures/symlinks/bower_components/angular');
-      var expectedJS = path.join(__dirname, 'old-fixtures/symlinks/bower_components/angular/angular.js');
+      var source     = path.join(__dirname, FIXTURES, 'symlinks/angular');
+      var dest       = path.join(__dirname, FIXTURES, 'symlinks/bower_components/angular');
+      var expectedJS = path.join(__dirname, FIXTURES, 'symlinks/bower_components/angular/angular.js');
       try {
         fs.symlinkSync(source, dest);
         cd('symlinks');
@@ -173,7 +176,7 @@ describe('bower-files tests', function () {
 // Helper functions
 // ----------------
 function cd(dir) {
-  process.chdir(path.join(__dirname, 'old-fixtures', dir));
+  process.chdir(path.join(__dirname, FIXTURES, dir));
 }
 function getModule(options) {
   return require('../index').old(options);

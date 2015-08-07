@@ -6,6 +6,8 @@ var expect     = require('chai').expect;
 var cd         = require('./helpers/cd');
 var BowerFiles = require('../index');
 
+var FIXTURES = path.join(__dirname, 'fixtures');
+
 describe('BowerFiles', function () {
 
   afterEach(function () {
@@ -20,9 +22,9 @@ describe('BowerFiles', function () {
       cd('default');
       var files = new BowerFiles();
       expect(files._config).to.be.eql({
-        cwd: path.resolve(__dirname, 'fixtures', 'default'),
+        cwd: path.resolve(FIXTURES, 'default'),
         json: 'bower.json',
-        dir: path.resolve(__dirname, 'fixtures', 'default', 'bower_components'),
+        dir: path.resolve(FIXTURES, 'default', 'bower_components'),
         overrides: {},
         componentJson: '.bower.json',
         camelCase: true
@@ -42,9 +44,9 @@ describe('BowerFiles', function () {
       cd('bowerrc');
       var files = new BowerFiles();
       expect(files._config).to.be.eql({
-        cwd: path.resolve(__dirname, 'fixtures', 'bowerrc'),
+        cwd: path.resolve(FIXTURES, 'bowerrc'),
         json: 'bower.json',
-        dir: path.resolve(__dirname, 'fixtures', 'bowerrc', 'components'),
+        dir: path.resolve(FIXTURES, 'bowerrc', 'components'),
         overrides: {},
         componentJson: '.bower.json',
         camelCase: true
@@ -56,9 +58,9 @@ describe('BowerFiles', function () {
       cd('default');
       var files = BowerFiles({dir: 'components'});
       expect(files._config).to.be.eql({
-        cwd: path.resolve(__dirname, 'fixtures', 'default'),
+        cwd: path.resolve(FIXTURES, 'default'),
         json: 'bower.json',
-        dir: path.resolve(__dirname, 'fixtures', 'default', 'components'),
+        dir: path.resolve(FIXTURES, 'default', 'components'),
         overrides: {},
         componentJson: '.bower.json',
         camelCase: true
@@ -78,7 +80,7 @@ describe('BowerFiles', function () {
         componentJson: 'bower.json'
       });
       expect(files._component.dependencies[0].files).to.be.eql([
-        path.resolve(__dirname, 'fixtures', 'components', 'bower_components',
+        path.resolve(FIXTURES, 'components', 'bower_components',
           'bootstrap', 'dist', 'js', 'npm.js')
       ]);
     });
@@ -89,7 +91,7 @@ describe('BowerFiles', function () {
         overrides: {jquery: {main: 'dist/jquery.min.js'}}
       });
       expect(files._component.dependencies[0].dependencies[0].files).to.eql([
-        path.resolve(__dirname, 'fixtures', 'default',
+        path.resolve(FIXTURES, 'default',
           'bower_components', 'jquery', 'dist', 'jquery.min.js')
       ]);
     });
@@ -103,8 +105,8 @@ describe('BowerFiles', function () {
       cd('default');
       var files = new BowerFiles();
       expect(files._component.files).to.be.eql([
-        path.resolve(__dirname, 'fixtures', 'default', 'dist', 'helpers.js'),
-        path.resolve(__dirname, 'fixtures', 'default', 'dist', 'main.js'),
+        path.resolve(FIXTURES, 'default', 'dist', 'helpers.js'),
+        path.resolve(FIXTURES, 'default', 'dist', 'main.js'),
       ]);
     });
 
@@ -115,14 +117,14 @@ describe('BowerFiles', function () {
       expect(files._component.devDependencies).to.have.length(1);
       expect(files._component.dependencies[0].name).to.be.equal('bootstrap');
       expect(files._component.dependencies[0].dir).to.be.equal(
-        path.resolve(__dirname, 'fixtures', 'default', 'bower_components')
+        path.resolve(FIXTURES, 'default', 'bower_components')
       );
     });
 
     it('should handle symlinked components', function () {
       /* jshint maxstatements: false */
       cd('symlink');
-      var symlinkDir = path.join(__dirname, 'fixtures', 'symlink');
+      var symlinkDir = path.join(FIXTURES, 'symlink');
       var src        = path.join(symlinkDir, 'angular');
       var dest       = path.join(symlinkDir, 'bower_components', 'angular');
       var error;
@@ -429,7 +431,7 @@ describe('BowerFiles', function () {
     it('should get dependency hash', function () {
       cd('default');
       var files = new BowerFiles();
-      var dir = path.join(__dirname, 'fixtures', 'default', 'bower_components');
+      var dir = path.join(FIXTURES, 'default', 'bower_components');
       var strap = path.join(dir, 'bootstrap');
       var dist  = path.join(strap, 'dist');
       expect(files.deps).to.be.eql({
@@ -457,7 +459,7 @@ describe('BowerFiles', function () {
     it('should get dependency hash with not camelCased deps', function () {
       cd('default');
       var files = new BowerFiles({camelCase: false});
-      var dir = path.join(__dirname, 'fixtures', 'default', 'bower_components');
+      var dir = path.join(FIXTURES, 'default', 'bower_components');
       var strap = path.join(dir, 'bootstrap');
       var dist  = path.join(strap, 'dist');
       expect(files.deps).to.be.eql({
@@ -485,7 +487,7 @@ describe('BowerFiles', function () {
     it('should get dependency hash with self', function () {
       cd('default');
       var files = new BowerFiles();
-      var self  = path.join(__dirname, 'fixtures', 'default');
+      var self  = path.join(FIXTURES, 'default');
       var dir   = path.join(self, 'bower_components');
       var strap = path.join(dir, 'bootstrap');
       var dist  = path.join(strap, 'dist');
@@ -518,7 +520,7 @@ describe('BowerFiles', function () {
     it('should get dependency hash with dev', function () {
       cd('default');
       var files = new BowerFiles();
-      var self  = path.join(__dirname, 'fixtures', 'default');
+      var self  = path.join(FIXTURES, 'default');
       var dir   = path.join(self, 'bower_components');
       var strap = path.join(dir, 'bootstrap');
       var dist  = path.join(strap, 'dist');

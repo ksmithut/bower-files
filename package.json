@@ -44,6 +44,7 @@
     "arrify": "^1.0.0",
     "bower-config": "^0.6.1",
     "camelcase": "^1.1.0",
+    "deprecate": "^0.1.0",
     "globby": "^2.1.0",
     "is-absolute": "^0.2.2",
     "is-symlink-sync": "^1.0.1",
