@@ -1,7 +1,7 @@
 {
   "name": "bower-files",
   "version": "3.8.0",
-  "main": "./lib/bower-files",
+  "main": "./index",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "files": [
     "bin",
@@ -41,7 +41,6 @@
     "mocha-lcov-reporter": "0.0.2"
   },
   "dependencies": {
-    "array-uniq": "^1.0.2",
     "arrify": "^1.0.0",
     "bower-config": "^0.6.1",
     "camelcase": "^1.1.0",

@@ -176,7 +176,7 @@ function cd(dir) {
   process.chdir(path.join(__dirname, 'old-fixtures', dir));
 }
 function getModule(options) {
-  return require('../').old(options);
+  return require('../index').old(options);
 }
 function deleteCache(filepath) {
   delete require.cache[require.resolve('../lib/' + filepath)];

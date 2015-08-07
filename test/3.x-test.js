@@ -4,7 +4,7 @@ var path       = require('path');
 var fs         = require('fs');
 var expect     = require('chai').expect;
 var cd         = require('./helpers/cd');
-var BowerFiles = require('..');
+var BowerFiles = require('../index');
 
 describe('BowerFiles', function () {
 
@@ -21,7 +21,7 @@ describe('BowerFiles', function () {
       var files = new BowerFiles();
       expect(files._config).to.be.eql({
         cwd: path.resolve(__dirname, 'fixtures', 'default'),
-        json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
+        json: 'bower.json',
         dir: path.resolve(__dirname, 'fixtures', 'default', 'bower_components'),
         overrides: {},
         componentJson: '.bower.json',
@@ -43,7 +43,7 @@ describe('BowerFiles', function () {
       var files = new BowerFiles();
       expect(files._config).to.be.eql({
         cwd: path.resolve(__dirname, 'fixtures', 'bowerrc'),
-        json: path.resolve(__dirname, 'fixtures', 'bowerrc', 'bower.json'),
+        json: 'bower.json',
         dir: path.resolve(__dirname, 'fixtures', 'bowerrc', 'components'),
         overrides: {},
         componentJson: '.bower.json',
@@ -57,7 +57,7 @@ describe('BowerFiles', function () {
       var files = BowerFiles({dir: 'components'});
       expect(files._config).to.be.eql({
         cwd: path.resolve(__dirname, 'fixtures', 'default'),
-        json: path.resolve(__dirname, 'fixtures', 'default', 'bower.json'),
+        json: 'bower.json',
         dir: path.resolve(__dirname, 'fixtures', 'default', 'components'),
         overrides: {},
         componentJson: '.bower.json',
@@ -351,8 +351,6 @@ describe('BowerFiles', function () {
       var cwd   = process.cwd();
       var dir   = path.join(cwd, 'bower_components');
       var bs    = path.join(dir, 'bootstrap');
-      console.log(process.cwd());
-      console.log(path.join(bs, 'dist', 'js', 'bootstrap.js'));
       expect(files.match('*/bootstrap/**/*.js').files).to.be.eql([
         path.join(bs, 'dist', 'js', 'bootstrap.js'),
       ]);
