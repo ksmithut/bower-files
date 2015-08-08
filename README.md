@@ -225,7 +225,8 @@ lib.files; // returns all of the files
 ```
 
 You may also get the `deps` property, which will be an object hash with all of
-the bower components as keys.
+the bower components as keys. Note that this is not guaranteed to be in the
+correct order. If you need the correct order, use the next option.
 
 ```javascript
 lib.deps;
@@ -234,6 +235,24 @@ lib.deps;
   jquery: [...],
   bootstrap: [...]
 }
+*/
+```
+
+You can also get an array of all of the dependencies with their names and files.
+
+```javascript
+lib.depsArray
+/*
+[
+  {
+    name: 'jquery',
+    files: [...]
+  },
+  {
+    name: 'bootstrap',
+    files: [...]
+  }
+]
 */
 ```
 
