@@ -15,7 +15,7 @@
     "jshint": "jshint --reporter node_modules/jshint-stylish lib/**",
     "check-cov": "istanbul check-coverage --statements 90 --functions 90 --branches 90 --lines 90",
     "test": "istanbul cover _mocha",
-    "posttest": " npm run check-cov; npm run jshint;",
+    "posttest": "#npm run check-cov; npm run jshint;",
     "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter"
   },
   "repository": {
