@@ -13,7 +13,7 @@
   },
   "scripts": {
     "jshint": "jshint --reporter node_modules/jshint-stylish lib/**",
-    "check-cov": "istanbul check-coverage --statements 90 --functions 90 --branches 90 --lines 90",
+    "check-cov": "istanbul check-coverage --statements 90 --functions 90 --branches 85 --lines 90",
     "test": "istanbul cover _mocha",
     "posttest": " npm run check-cov; npm run jshint;",
     "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter"
@@ -44,6 +44,7 @@
     "arrify": "^1.0.0",
     "bower-config": "^0.6.1",
     "camelcase": "^1.1.0",
+    "debug": "^2.2.0",
     "deprecate": "^0.1.0",
     "globby": "^2.1.0",
     "is-absolute": "^0.2.2",

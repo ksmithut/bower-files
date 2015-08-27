@@ -159,6 +159,12 @@ describe('bower-files tests', function () {
       expect(error).to.be.instanceOf(Error);
       error = null;
     });
+
+    it('handles no main property', function () {
+      cd('no-main');
+      var error;
+      var files = getModule();
+    });
   });
 
 });
