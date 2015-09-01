@@ -46,11 +46,11 @@
     "camelcase": "^1.1.0",
     "debug": "^2.2.0",
     "deprecate": "^0.1.0",
-    "globby": "^2.1.0",
+    "globby": "^3.0.0",
     "is-absolute": "^0.2.2",
     "is-symlink-sync": "^1.0.1",
     "minimatch": "^2.0.8",
-    "object-assign": "^3.0.0",
+    "object-assign": "^4.0.1",
     "read-json-sync": "^1.1.0",
     "untildify": "^2.1.0",
     "yargs": "^3.15.0"
