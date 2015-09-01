@@ -134,39 +134,6 @@ describe('bower-files tests', function () {
     });
   });
 
-
-  describe('Level 2', function () {
-
-    it('fails with no bower.json', function () {
-      cd('no-bower');
-      var error;
-      try { var files = getModule(); }
-      catch (e) { error = e; }
-      expect(error).to.be.instanceOf(Error);
-    });
-
-    it('handles missing dependencies', function () {
-      cd('missing-dependencies');
-      var error, files;
-      try { files = getModule(); }
-      catch (e) { error = e; }
-      expect(error).to.be.instanceOf(Error);
-      error = null;
-
-      cd('missing-child-dependencies');
-      try { files = getModule(); }
-      catch (e) { error = e; }
-      expect(error).to.be.instanceOf(Error);
-      error = null;
-    });
-
-    it('handles no main property', function () {
-      cd('no-main');
-      var error;
-      var files = getModule();
-    });
-  });
-
 });
 
 // Helper functions

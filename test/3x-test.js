@@ -587,6 +587,45 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should not care about devDependencies', function () {
+      cd('production');
+      var files = new BowerFiles();
+      var self  = path.join(FIXTURES, 'production');
+      var dir   = path.join(self, 'bower_components');
+      var strap = path.join(dir, 'bootstrap');
+      var dist  = path.join(strap, 'dist');
+      expect(files.dev().depsArray).to.be.eql([
+        {
+          files: [],
+          name: 'angularAnimate'
+        },
+        {
+          name: 'jquery',
+          files: [path.join(dir, 'jquery', 'dist', 'jquery.js')]
+        },
+        {
+          name: 'bootstrap',
+          files: [
+            path.join(strap, 'less', 'bootstrap.less'),
+            path.join(dist, 'css', 'bootstrap.css'),
+            path.join(dist, 'js', 'bootstrap.js'),
+            path.join(dist, 'fonts', 'glyphicons-halflings-regular.eot'),
+            path.join(dist, 'fonts', 'glyphicons-halflings-regular.svg'),
+            path.join(dist, 'fonts', 'glyphicons-halflings-regular.ttf'),
+            path.join(dist, 'fonts', 'glyphicons-halflings-regular.woff')
+          ]
+        },
+        {
+          name: 'angular',
+          files: [path.join(dir, 'angular', 'angular.js')]
+        },
+        {
+          name: 'angularRoute',
+          files: [path.join(dir, 'angular-route', 'angular-route.js')]
+        }
+      ]);
+    });
+
   });
 
 });
