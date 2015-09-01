@@ -1,6 +1,6 @@
 {
   "name": "bower-files",
-  "version": "3.10.0",
+  "version": "3.11.0",
   "main": "./index",
   "description": "Pulls in dynamic list of filepaths to bower components",
   "files": [
