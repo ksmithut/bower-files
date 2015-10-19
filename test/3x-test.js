@@ -626,6 +626,12 @@ describe('BowerFiles', function () {
       ]);
     });
 
+    it('should ignore empty main definition', function () {
+      cd('empty-main');
+      var files = new BowerFiles();
+      expect(files.main(true).files).to.be.eql([]);
+    });
+
   });
 
 });
