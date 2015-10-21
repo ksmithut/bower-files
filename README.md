@@ -105,10 +105,10 @@ module.exports = function (grunt) {
 };
 ```
 
-or via the CLI
+or via the CLI (`bower-components/.bin` needs to be in your `PATH`):
 
 ```sh
-$ bower-ls js css
+$ bower-files js css
 ```
 
 *Other Solutions*
