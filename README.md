@@ -105,7 +105,7 @@ module.exports = function (grunt) {
 };
 ```
 
-or via the CLI (`bower-components/.bin` needs to be in your `PATH`):
+or via the CLI (`node-modules/.bin` needs to be in your `PATH`):
 
 ```sh
 $ bower-files js css
