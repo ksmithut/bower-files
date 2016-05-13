@@ -52,7 +52,7 @@
     "minimatch": "^3.0.0",
     "object-assign": "^4.1.0",
     "read-json-sync": "^1.1.1",
-    "untildify": "^3.0.2",
+    "untildify": "^2.1.0",
     "yargs": "^4.7.0"
   }
 }
