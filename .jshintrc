@@ -15,7 +15,7 @@
   "indent"        : 2,        // 2 space indent
   "iterator"      : false,    // Suppresses warnings about the __iterator__ property
   "latedef"       : "nofunc", // Makes you declare your variables at the top of the scope they're used in, but not the functions
-  "maxcomplexity" : 7,        // forces functions to have less complex paths
+  "maxcomplexity" : 10,       // forces functions to have less complex paths
   "maxdepth"      : 3,        // forces nested blocks to only be a certain number of blocks deep
   "maxerr"        : 100,      // maximum number of errors jshint will report before giving up
   "maxlen"        : 80,       // maximum line length

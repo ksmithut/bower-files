@@ -290,8 +290,8 @@ lib.dev().main(false).deps;
 
 #### `lib.dev()`
 
-This throws in your `devDependencies`. Right now they come before the normal
-dependencies, but I may be convinced to change that if someone runs into issues.
+This throws in your `devDependencies`. By default, they come before the normal
+dependencies, but you can put them after by calling `lib.dev('after')`
 
 ```javascript
 lib.dev().files;
