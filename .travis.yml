@@ -4,11 +4,7 @@ os:
   - linux
 node_js:
   - "stable"
-  - "4"
+  - "6"
   - "5"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-env:
-  - secure: YluKuY1ozB5c7p8ytXMfPXUEyMNazANjsfHREqCNHe4mfVpU7e/FdLp4KcCVNdieOU9e5dZOx9HdbME1jcKnyaba19bCTxCnre8X+3yKTBdoSS693iEWgnXmm6VAcpUxXjtbnB5yZvwccJFAXuYWS25jbuQSPjvNHPOVwtMl0mw=
+  - "4"
 after_success: npm run codeclimate

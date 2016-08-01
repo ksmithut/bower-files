@@ -1,0 +1,10 @@
+instrumentation:
+  excludes:
+    - 'test/*.js'
+    - '**/*.spec.js'
+check:
+  global:
+    statements: 100
+    lines: 100
+    branches: 100
+    functions: 100
