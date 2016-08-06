@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
-var path        = require('path');
-var originalDir = process.cwd();
+const path = require('path')
+const originalDir = process.cwd()
 
-module.exports = function (base) {
-  var fixturesDir = path.resolve(__dirname, '..', base);
-  var current     = originalDir;
+module.exports = (base) => {
+  const fixturesDir = path.resolve(__dirname, '..', base)
+  let current = originalDir
   function cd(dir) {
-    current = path.resolve(fixturesDir, dir);
-    process.chdir(current);
+    current = path.resolve(fixturesDir, dir)
+    process.chdir(current)
   }
-  cd.reset = cd.bind(null, originalDir);
-  return cd;
-};
+  cd.reset = cd.bind(null, originalDir)
+  return cd
+}
