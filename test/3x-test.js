@@ -236,6 +236,8 @@ describe('BowerFiles', function () {
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.svg'),
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.ttf'),
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.woff'),
+        path.join(dir, 'angular/angular.js'),
+        path.join(dir, 'angular-route/angular-route.js'),
         path.join(cwd, 'dist.js')
       ])
     })

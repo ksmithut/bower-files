@@ -285,6 +285,17 @@ lib.dev().main(false).files;
 lib.dev().main(false).deps;
 ```
 
+#### `lib.useFiles()`
+
+Default: false
+
+This lets use switch to use the "files" property instead of the "main" property.
+This is more in line with the new bower spec. The "main" property is meant to be
+used when pulling in files using the respective language's dependency system.
+the "files" property is meant to be used for tools like 'bower-files' or
+'wire-dep'. If a `files` property is not included, then the 'main' property will
+be used.
+
 #### `lib.dev()`
 
 This throws in your `devDependencies`. By default, they come before the normal
