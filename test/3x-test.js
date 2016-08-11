@@ -78,7 +78,7 @@ describe('BowerFiles', function () {
         json: 'component.json',
         componentJson: 'bower.json'
       });
-      expect(files._component.dependencies[0].files).to.be.eql([
+      expect(files._component.dependencies[0].files()).to.be.eql([
         path.resolve(FIXTURES, 'components', 'bower_components',
           'bootstrap', 'dist', 'js', 'npm.js')
       ]);
@@ -89,7 +89,7 @@ describe('BowerFiles', function () {
       var files = new BowerFiles({
         overrides: {jquery: {main: 'dist/jquery.min.js'}}
       });
-      expect(files._component.dependencies[0].dependencies[0].files).to.eql([
+      expect(files._component.dependencies[0].dependencies[0].files()).to.eql([
         path.resolve(FIXTURES, 'default',
           'bower_components', 'jquery', 'dist', 'jquery.min.js')
       ]);
@@ -103,7 +103,7 @@ describe('BowerFiles', function () {
     it('should have a main component with full path to files', function () {
       cd('default');
       var files = new BowerFiles();
-      expect(files._component.files).to.be.eql([
+      expect(files._component.files()).to.be.eql([
         path.resolve(FIXTURES, 'default', 'dist', 'helpers.js'),
         path.resolve(FIXTURES, 'default', 'dist', 'main.js'),
       ]);
@@ -221,6 +221,24 @@ describe('BowerFiles', function () {
         path.join(dir, 'angular-route', 'angular-route.js')
       ]);
     });
+
+    it('should include files from files property', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      expect(files.useFiles(true).self(true).files).to.be.eql([
+        path.join(dir, 'jquery/dist/jquery.js'),
+        path.join(bs, 'dist/css/bootstrap.css'),
+        path.join(bs, 'dist/js/bootstrap.js'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.eot'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.svg'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.ttf'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.woff'),
+        path.join(cwd, 'dist.js')
+      ])
+    })
 
     it('should get dev files', function () {
       cd('default');
