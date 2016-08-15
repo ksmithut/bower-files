@@ -285,9 +285,9 @@ lib.dev().main(false).files;
 lib.dev().main(false).deps;
 ```
 
-#### `lib.fileListProps()`
+#### `lib.fileListProps(props, useOne)`
 
-Default: ['main']
+Default: ['main'], true
 
 This lets you select which bower properties are used when generating a file list
 for a component. For example, it seems that the bower standard for lists of
@@ -297,9 +297,15 @@ You could also select both: `lib.fileListProps(['files', 'main'])` and it would
 remove the duplicate files that match both the main property definition and the
 files property definition (it expands globs and uniquifies the lists)
 
+The second option allows you to specify whether or not you want it to stop
+trying to read additional file list properties when it finds one. For example,
+you may specify `['files', 'main']`, and then `true` as the second option, and
+all components with a `files` property would ignore the 'main' property.
+If it's set to false, it would include all of the files in the 'main' property.
+
 ```javascript
 lib.fileListProps('files').files;
-lib.fileListProps(['file', 'main']).files;
+lib.fileListProps(['files', 'main']).files;
 ```
 
 #### `lib.dev()`
