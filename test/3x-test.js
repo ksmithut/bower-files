@@ -207,7 +207,7 @@ describe('BowerFiles', function () {
       var cwd   = process.cwd();
       var dir   = path.join(cwd, 'bower_components');
       var bs    = path.join(dir, 'bootstrap');
-      expect(files.dev().main(true).files).to.be.eql([
+      expect(files.dev().fileListProps('main').files).to.be.eql([
         path.join(dir, 'angular', 'angular.js'),
         path.join(dir, 'angular-animate', 'angular-animate.js'),
         path.join(dir, 'jquery', 'dist', 'jquery.js'),
@@ -228,7 +228,7 @@ describe('BowerFiles', function () {
       var cwd   = process.cwd();
       var dir   = path.join(cwd, 'bower_components');
       var bs    = path.join(dir, 'bootstrap');
-      expect(files.useFiles(true).self(true).files).to.be.eql([
+      expect(files.fileListProps('files').self(true).files).to.be.eql([
         path.join(dir, 'jquery/dist/jquery.js'),
         path.join(bs, 'dist/css/bootstrap.css'),
         path.join(bs, 'dist/js/bootstrap.js'),
@@ -236,8 +236,6 @@ describe('BowerFiles', function () {
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.svg'),
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.ttf'),
         path.join(bs, 'dist/fonts/glyphicons-halflings-regular.woff'),
-        path.join(dir, 'angular/angular.js'),
-        path.join(dir, 'angular-route/angular-route.js'),
         path.join(cwd, 'dist.js')
       ])
     })
