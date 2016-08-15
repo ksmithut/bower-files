@@ -228,7 +228,7 @@ describe('BowerFiles', function () {
       var cwd   = process.cwd();
       var dir   = path.join(cwd, 'bower_components');
       var bs    = path.join(dir, 'bootstrap');
-      expect(files.fileListProps('files').self(true).files).to.be.eql([
+      expect(files.fileListProps(['files']).self(true).files).to.be.eql([
         path.join(dir, 'jquery/dist/jquery.js'),
         path.join(bs, 'dist/css/bootstrap.css'),
         path.join(bs, 'dist/js/bootstrap.js'),

@@ -285,16 +285,22 @@ lib.dev().main(false).files;
 lib.dev().main(false).deps;
 ```
 
-#### `lib.useFiles()`
+#### `lib.fileListProps()`
 
-Default: false
+Default: ['main']
 
-This lets use switch to use the "files" property instead of the "main" property.
-This is more in line with the new bower spec. The "main" property is meant to be
-used when pulling in files using the respective language's dependency system.
-the "files" property is meant to be used for tools like 'bower-files' or
-'wire-dep'. If a `files` property is not included, then the 'main' property will
-be used.
+This lets you select which bower properties are used when generating a file list
+for a component. For example, it seems that the bower standard for lists of
+files used by tools like this one is to use the `files` property. You could use
+`lib.fileListProps('files')` to utilize that property instead of the other one.
+You could also select both: `lib.fileListProps(['files', 'main'])` and it would
+remove the duplicate files that match both the main property definition and the
+files property definition (it expands globs and uniquifies the lists)
+
+```javascript
+lib.fileListProps('files').files;
+lib.fileListProps(['file', 'main']).files;
+```
 
 #### `lib.dev()`
 
