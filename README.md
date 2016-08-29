@@ -308,6 +308,22 @@ lib.fileListProps('files').files;
 lib.fileListProps(['files', 'main']).files;
 ```
 
+#### `lib.ignoreListProps(props)`
+
+Default []
+
+This lets you select which bower properties are used when ignore globs of files.
+This is to support the bower spec which allows you to use globs in the "files"
+property, and "ignore" which would ignore groups of files that match the
+"files" patterns.
+
+```javascript
+lib
+  .fileListProps('files')
+  .ignoreListProps('ignore')
+  .files;
+```
+
 #### `lib.dev()`
 
 This throws in your `devDependencies`. By default, they come before the normal

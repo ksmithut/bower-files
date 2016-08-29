@@ -283,6 +283,32 @@ describe('BowerFiles', function () {
       ])
     })
 
+    it('should ignore files from the ignore property', function () {
+      cd('default');
+      var files = new BowerFiles();
+      var cwd   = process.cwd();
+      var dir   = path.join(cwd, 'bower_components');
+      var bs    = path.join(dir, 'bootstrap');
+      files = files
+        .ignoreListProps('ignore')
+        .fileListProps(['files', 'main'], false)
+        .self(true)
+        .files
+      expect(files).to.be.eql([
+        path.join(dir, 'jquery/dist/jquery.js'),
+        path.join(bs, 'dist/css/bootstrap.css'),
+        path.join(bs, 'dist/js/bootstrap.js'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.eot'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.svg'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.ttf'),
+        path.join(bs, 'dist/fonts/glyphicons-halflings-regular.woff'),
+        path.join(bs, 'less/bootstrap.less'),
+        path.join(dir, 'angular/angular.js'),
+        path.join(dir, 'angular-route/angular-route.js'),
+        path.join(cwd, 'dist.js')
+      ])
+    })
+
     it('should get dev files', function () {
       cd('default');
       var files = new BowerFiles();
