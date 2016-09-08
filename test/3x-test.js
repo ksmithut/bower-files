@@ -753,6 +753,20 @@ describe('BowerFiles', function () {
       expect(files.main(true).files).to.be.eql([]);
     });
 
+    it('should resolve overrides based on dep name, not on bower.json name', function() {
+      cd('overrides-mismatch');
+      var files = new BowerFiles({
+        overrides: {
+          katex: {
+            main: 'foo.js'
+          }
+        }
+      })
+      expect(files.files).to.be.eql([
+        path.resolve('bower_components', 'katex', 'foo.js')
+      ]);
+    })
+
   });
 
 });
