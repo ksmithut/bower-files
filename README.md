@@ -285,6 +285,45 @@ lib.dev().main(false).files;
 lib.dev().main(false).deps;
 ```
 
+#### `lib.fileListProps(props, useOne)`
+
+Default: ['main'], true
+
+This lets you select which bower properties are used when generating a file list
+for a component. For example, it seems that the bower standard for lists of
+files used by tools like this one is to use the `files` property. You could use
+`lib.fileListProps('files')` to utilize that property instead of the other one.
+You could also select both: `lib.fileListProps(['files', 'main'])` and it would
+remove the duplicate files that match both the main property definition and the
+files property definition (it expands globs and uniquifies the lists)
+
+The second option allows you to specify whether or not you want it to stop
+trying to read additional file list properties when it finds one. For example,
+you may specify `['files', 'main']`, and then `true` as the second option, and
+all components with a `files` property would ignore the 'main' property.
+If it's set to false, it would include all of the files in the 'main' property.
+
+```javascript
+lib.fileListProps('files').files;
+lib.fileListProps(['files', 'main']).files;
+```
+
+#### `lib.ignoreListProps(props)`
+
+Default []
+
+This lets you select which bower properties are used when ignore globs of files.
+This is to support the bower spec which allows you to use globs in the "files"
+property, and "ignore" which would ignore groups of files that match the
+"files" patterns.
+
+```javascript
+lib
+  .fileListProps('files')
+  .ignoreListProps('ignore')
+  .files;
+```
+
 #### `lib.dev()`
 
 This throws in your `devDependencies`. By default, they come before the normal

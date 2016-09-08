@@ -2,6 +2,9 @@
   "name": "jquery",
   "version": "2.1.3",
   "main": "dist/jquery.js",
+  "files": [
+    "dist/jquery.js"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",

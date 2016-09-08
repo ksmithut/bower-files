@@ -11,9 +11,13 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "dist/*"
   ],
   "main": "dist/*",
+  "files": [
+     "dist.js"
+  ],
   "private": "true",
   "dependencies": {
     "bootstrap": "~3.3.1",
