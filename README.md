@@ -7,6 +7,16 @@
 [![Build Status](http://img.shields.io/travis/ksmithut/bower-files/master.svg?style=flat)](https://travis-ci.org/ksmithut/bower-files)
 [![Coverage Status](http://img.shields.io/codeclimate/coverage/github/ksmithut/bower-files.svg?style=flat)](https://codeclimate.com/github/ksmithut/bower-files)
 
+**Looking for another maintainer. I have been cleaning up my packages and no
+longer have the energy to maintain this package. If you are interested in
+taking over, please reach out. Otherwise, eventually I will have this package
+removed. There are much better alternatives that have much better community
+adoption/support. The best alternative I could find was
+[wiredep](https://github.com/taptapship/wiredep). Honestly, I don't use bower
+anymore, and it's been a long time since I have. I've opted to use webpack with
+standard `npm` installs. If you haven't tried that yet, you should definitely
+give it a try.**
+
 Help you dynamically include your bower components into your build process.
 
 **The Problem**
