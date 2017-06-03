@@ -12,10 +12,10 @@
     "bower-files": "bin/bower-files"
   },
   "scripts": {
-    "jshint": "jshint --reporter node_modules/jshint-stylish lib/**",
-    "check-cov": "istanbul check-coverage --statements 90 --functions 90 --branches 85 --lines 90",
+    "pretest": "npm run lint",
     "test": "istanbul cover _mocha",
-    "posttest": " npm run check-cov; npm run jshint;",
+    "posttest": "istanbul check-coverage --statements 100 --lines 100 --branches 100 --functions 100",
+    "lint": "standard lib bin test/*.js",
     "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter"
   },
   "repository": {
@@ -31,19 +31,26 @@
   "bugs": {
     "url": "https://github.com/ksmithut/bower-files/issues"
   },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "standard"
+    ]
+  },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "codeclimate-test-reporter": "^0.3.3",
+    "chai": "^4.0.1",
+    "codeclimate-test-reporter": "^0.5.0",
     "istanbul": "^0.4.5",
     "jshint": "^2.9.3",
     "jshint-stylish": "^2.2.1",
     "mocha": "^3.0.2",
-    "mocha-lcov-reporter": "^1.2.0"
+    "mocha-lcov-reporter": "^1.2.0",
+    "standard": "^10.0.2"
   },
   "dependencies": {
     "arrify": "^1.0.1",
     "bower-config": "^1.4.0",
-    "camelcase": "^3.0.0",
+    "camelcase": "^4.1.0",
     "debug": "^2.2.0",
     "deprecate": "^1.0.0",
     "globby": "^6.0.0",
@@ -52,7 +59,7 @@
     "minimatch": "^3.0.3",
     "object-assign": "^4.1.0",
     "read-json-sync": "^1.1.1",
-    "untildify": "^2.1.0",
-    "yargs": "^5.0.0"
+    "untildify": "^3.0.2",
+    "yargs": "^8.0.1"
   }
 }
