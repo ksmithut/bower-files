@@ -34,6 +34,12 @@ the library files for you to include in whatever build process you use. It
 splits up the files by extension, and puts them in the order they need to be in,
 in order to work correctly in the browser.
 
+## 4.x
+
+Just updated dependencies and support for only node >= 4.x. Also added
+deprecation notice. Otherwise, api is exactly the same and should work the same
+as it did before.
+
 ## 3.x
 
 There are breaking changes in 3.x. A few features were requested, but with the
