@@ -41,7 +41,7 @@
     "chai": "^4.0.1",
     "codeclimate-test-reporter": "^0.5.0",
     "istanbul": "^0.4.5",
-    "jshint": "^2.9.3",
+    "jshint": "^2.9.7",
     "jshint-stylish": "^2.2.1",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.2.0",
@@ -51,15 +51,15 @@
     "arrify": "^1.0.1",
     "bower-config": "^1.4.0",
     "camelcase": "^5.0.0",
-    "debug": "^4.1.0",
+    "debug": "^4.1.1",
     "deprecate": "^1.0.0",
-    "globby": "^8.0.1",
+    "globby": "^8.0.2",
     "is-absolute": "^1.0.0",
     "is-symlink-sync": "^2.0.0",
     "minimatch": "^3.0.3",
     "object-assign": "^4.1.0",
-    "read-json-sync": "^2.0.0",
+    "read-json-sync": "^2.0.1",
     "untildify": "^3.0.2",
-    "yargs": "^12.0.2"
+    "yargs": "^12.0.5"
   }
 }
